@@ -1,0 +1,3 @@
+class DistrictRepository
+
+end
