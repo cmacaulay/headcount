@@ -1,0 +1,40 @@
+{
+  "Unit Tests": {
+    "coverage": {
+      "/Users/jamesanderson/Turing/projects/mod1/headcount/lib/district_repository.rb": [
+        null,
+        1,
+        1,
+        null,
+        1,
+        null,
+        1,
+        null,
+        1,
+        4,
+        null,
+        null,
+        1,
+        1,
+        1,
+        null,
+        null,
+        1,
+        1,
+        1,
+        1,
+        null,
+        null,
+        null,
+        1,
+        1,
+        null,
+        1991,
+        null,
+        null,
+        null
+      ]
+    },
+    "timestamp": 1483573392
+  }
+}

@@ -3,7 +3,7 @@ require './lib/data_translator'
 
 class DataTranslatorTest < Minitest::Test
 
-
+  
 
   # def test_string_should_be_upcase
   #   dct = DataCleaning.new
@@ -13,7 +13,7 @@ class DataTranslatorTest < Minitest::Test
   #   assert_equal "COLORADO", dct.upcase_string("colorado")
   #   assert_equal "COLORADO", dct.upcase_string("colOrado  ")
   # end
-  # 
+  #
   # def test_number
   #   dct = DataCleaning.new
   #
