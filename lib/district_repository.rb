@@ -38,8 +38,7 @@ attr_reader :districts
   def save_districts(file)
 	    file.collect do |row|
         district_name = row[:location].upcase
-        binding.pry
-		    @districts[district_name] = District.new #will over-write if it finds a duplicate district
+		    districts[district_name] = District.new #will over-write if it finds a duplicate district
 	end
 end
 
