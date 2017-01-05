@@ -19,7 +19,6 @@ attr_reader :districts
     files.each do |key, file|
       data = load_csv(file)
       districts = save_districts(data)
-      binding.pry
     end
   end
 
@@ -34,5 +33,9 @@ attr_reader :districts
         district_name = row[:location].upcase
         { district_name => District.new }
       end
+  end
+
+  def find_by_name(name)
+    districts.select{|key, value| value["#{district_name}"] == name}
   end
 end
