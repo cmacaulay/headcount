@@ -33,7 +33,7 @@ class DistrictRepositoryTest < Minitest::Test
   def test_it_loads_file
     assert dr.districts.empty?
     load_data
-    assert dr.districts.empty?
+    refute dr.districts.empty?
   end
 
   def test_it_can_find_by_name
