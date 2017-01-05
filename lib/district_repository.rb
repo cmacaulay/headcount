@@ -18,7 +18,7 @@ attr_reader :districts
   def create_repository(files)
     files.each do |key, file|
       data = load_csv(file)
-      districts = save_districts(data)
+      save_districts(data)
     end
   end
 
@@ -28,14 +28,22 @@ attr_reader :districts
       header_converters: :symbol
   end
 
+  # def save_districts(file)
+  #   @districts = file.collect do |row|
+  #       district_name = row[:location].upcase
+  #       { district_name => District.new }
+  #   end
+  # end
+
   def save_districts(file)
-    file.collect do |row|
+	    file.collect do |row|
         district_name = row[:location].upcase
-        { district_name => District.new }
-      end
+        districts[district_name] = District.new #will over-write if it finds a duplicate district
+	  end
   end
 
   def find_by_name(name)
     districts.select{|key, value| value["#{district_name}"] == name}
   end
+
 end
