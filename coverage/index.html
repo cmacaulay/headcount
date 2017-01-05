@@ -14,7 +14,7 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-01-04T16:43:12-07:00">2017-01-04T16:43:12-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-01-04T18:41:51-07:00">2017-01-04T18:41:51-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,15 +25,15 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         125.6
+         111.7
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>1</b> files in total.
-    <b>16</b> relevant lines. 
-    <span class="green"><b>16</b> lines covered</span> and
+    <b>18</b> relevant lines. 
+    <span class="green"><b>18</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -51,13 +51,13 @@
     <tbody>
       
       <tr>
-        <td class="strong"><a href="#1cce397d3fd84285cb049aac3fd6d45de41ff963" class="src_link" title="lib/district_repository.rb">lib/district_repository.rb</a></td>
+        <td class="strong"><a href="#be9d7f9060fc508855f75c453eaaa0f88743d6fa" class="src_link" title="lib/district_repository.rb">lib/district_repository.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>31</td>
-        <td>16</td>
-        <td>16</td>
+        <td>39</td>
+        <td>18</td>
+        <td>18</td>
         <td>0</td>
-        <td>125.6</td>
+        <td>111.7</td>
       </tr>
       
     </tbody>
@@ -76,13 +76,13 @@
     
       <div class="source_files">
       
-        <div class="source_table" id="1cce397d3fd84285cb049aac3fd6d45de41ff963">
+        <div class="source_table" id="be9d7f9060fc508855f75c453eaaa0f88743d6fa">
   <div class="header">
     <h3>lib/district_repository.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>16</b> relevant lines. 
-      <span class="green"><b>16</b> lines covered</span> and
+      <b>18</b> relevant lines. 
+      <span class="green"><b>18</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -177,7 +177,7 @@
         <li class="covered" data-hits="1" data-linenumber="15">
           <span class="hits">1</span>
           
-          <code class="ruby">    load_csv(files)</code>
+          <code class="ruby">    create_repository(files)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="16">
@@ -195,82 +195,130 @@
         <li class="covered" data-hits="1" data-linenumber="18">
           <span class="hits">1</span>
           
-          <code class="ruby">  def load_csv(files)</code>
+          <code class="ruby">  def create_repository(files)</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="19">
           <span class="hits">1</span>
           
-          <code class="ruby">    files.each do |key, value|</code>
+          <code class="ruby">    files.each do |key, file|</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="20">
           <span class="hits">1</span>
           
-          <code class="ruby">    file = CSV.open &quot;#{value}&quot;, headers:true, header_converters: :symbol</code>
+          <code class="ruby">      data = load_csv(file)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="21">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="21">
           
-          <code class="ruby">    save_districts(file)</code>
+          
+          <code class="ruby">    # file = CSV.open &quot;#{file}&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="22">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">    #   headers:true,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="23">
           
           
+          <code class="ruby">    #   header_converters: :symbol</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="24">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    save_districts(data)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="25">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="26">
+          
+          
           <code class="ruby">  end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="24">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="25">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  def save_districts(file)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="26">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    @districts =</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="27">
           
           
-          <code class="ruby">      file.map do |row|</code>
+          <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1991" data-linenumber="28">
-          <span class="hits">1991</span>
+        <li class="covered" data-hits="1" data-linenumber="28">
+          <span class="hits">1</span>
           
-          <code class="ruby">        row[:location].upcase</code>
+          <code class="ruby">  def load_csv(file)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="29">
+        <li class="covered" data-hits="1" data-linenumber="29">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">      end</code>
+          <code class="ruby">    CSV.open &quot;#{file}&quot;,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="30">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">      headers:true,</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="31">
+          
+          
+          <code class="ruby">      header_converters: :symbol</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="32">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="33">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="34">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def save_districts(file)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="35">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      file.each do |row|</code>
+        </li>
+      
+        <li class="covered" data-hits="1991" data-linenumber="36">
+          <span class="hits">1991</span>
+          
+          <code class="ruby">        row[:location].upcase</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="37">
+          
+          
+          <code class="ruby">      end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="38">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="39">
           
           
           <code class="ruby">end</code>

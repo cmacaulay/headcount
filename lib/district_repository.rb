@@ -12,19 +12,27 @@ attr_reader :districts
 
   def load_data(data)
     files = data[:enrollment]
-    load_csv(files)
+    create_repository(files)
   end
 
-  def load_csv(files)
-    files.each do |key, value|
-    file = CSV.open "#{value}", headers:true, header_converters: :symbol
-    save_districts(file)
+  def create_repository(files)
+    files.each do |key, file|
+      data = load_csv(file)
+    # file = CSV.open "#{file}",
+    #   headers:true,
+    #   header_converters: :symbol
+    save_districts(data)
     end
   end
 
+  def load_csv(file)
+    CSV.open "#{file}",
+      headers:true,
+      header_converters: :symbol
+  end
+
   def save_districts(file)
-    @districts =
-      file.map do |row|
+      file.each do |row|
         row[:location].upcase
       end
   end
