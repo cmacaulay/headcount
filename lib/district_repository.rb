@@ -1,4 +1,4 @@
-# require_relative 'district'
+require_relative 'district'
 require "csv"
 require "pry"
 
@@ -7,7 +7,7 @@ class DistrictRepository
 attr_reader :districts
 
   def initialize
-    @districts = {}
+    @districts = Hash.new
   end
 
   def load_data(data)
@@ -18,10 +18,8 @@ attr_reader :districts
   def create_repository(files)
     files.each do |key, file|
       data = load_csv(file)
-    # file = CSV.open "#{file}",
-    #   headers:true,
-    #   header_converters: :symbol
-    save_districts(data)
+      districts = save_districts(data)
+      binding.pry
     end
   end
 
@@ -32,8 +30,9 @@ attr_reader :districts
   end
 
   def save_districts(file)
-      file.each do |row|
-        row[:location].upcase
+    file.collect do |row|
+        district_name = row[:location].upcase
+        { district_name => District.new }
       end
   end
 end

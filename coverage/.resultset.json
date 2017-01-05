@@ -2,7 +2,7 @@
   "Unit Tests": {
     "coverage": {
       "/Users/caseymacaulay/Projects/Turing/1module/projects/headcount/lib/district_repository.rb": [
-        null,
+        1,
         1,
         1,
         null,
@@ -26,6 +26,7 @@
         null,
         null,
         1,
+        1,
         null,
         null,
         null,
@@ -38,11 +39,17 @@
         1,
         1,
         1991,
+        1991,
         null,
+        null,
+        null
+      ],
+      "/Users/caseymacaulay/Projects/Turing/1module/projects/headcount/lib/district.rb": [
+        1,
         null,
         null
       ]
     },
-    "timestamp": 1483580511
+    "timestamp": 1483582362
   }
 }
