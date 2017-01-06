@@ -17,7 +17,6 @@ class EnrollmentRepository
   def create_repository(files)
     files.each do |key, file|
       data = load_csv(file)
-      binding.pry
       save_enrollment_data(key, data)
     end
   end
@@ -32,7 +31,6 @@ class EnrollmentRepository
 	    file.collect do |row|
         enrollments[district_name(row)] = Enrollment.new({:name => district_name(row), key => row }) #will over-write if it finds a duplicate district
 	  end
-    binding.pry
   end
   #
   def district_name(row)
