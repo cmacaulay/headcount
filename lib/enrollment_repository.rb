@@ -10,14 +10,19 @@ class EnrollmentRepository
 
 
   def load_data(data)
-    files = data[:enrollment]
-    create_repository(files)
+    create_repository(files(data))
+  end
+
+  def files(data)
+    data[:enrollment]
   end
 
   def create_repository(files)
     files.each do |key, file|
-      data = load_csv(file)
-      save_enrollment_data(key, data)
+      if files.has_key?(key)
+        binding.pry
+        save_enrollment_data(key, load_csv(file))
+    end
     end
   end
 
@@ -28,11 +33,21 @@ class EnrollmentRepository
   end
 
   def save_enrollment_data(key, file)
-	    file.collect do |row|
-        enrollments[district_name(row)] = Enrollment.new({:name => district_name(row), key => row }) #will over-write if it finds a duplicate district
+	    something = file.collect do |row|
+        year = row[:timeframe]
+        enrollment_percentage = row[:data]
+        hash = { key.row => create_hash(row)}
+        binding.pry
+        # hash_with_key[year] = enrollment_percentage
+        # enrollments[district_name(row)] = Enrollment.new({:name => district_name(row), key => row }) #will over-write if it finds a duplicate district
 	  end
   end
-  #
+
+  def create_hash(row)
+    
+  end
+
+
   def district_name(row)
     row[:location].upcase
   end
