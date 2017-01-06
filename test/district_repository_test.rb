@@ -1,5 +1,6 @@
 require './test/test_helper'
 require './lib/district_repository'
+require './lib/enrollment_repository'
 
 class DistrictRepositoryTest < Minitest::Test
 
@@ -12,7 +13,8 @@ class DistrictRepositoryTest < Minitest::Test
   def load_data
     dr.load_data({
       :enrollment => {
-        :kindergarten => "./test/fixtures/Kindergartners in full-day program.csv"
+        :kindergarten => "./test/fixtures/Kindergartners in full-day program.csv",
+        :high_school_graduation => "./test/fixtures/High school graduation rates.csv"
       }
       })
       district = dr.find_by_name("ACADEMY 20")
