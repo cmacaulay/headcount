@@ -5,16 +5,17 @@ require "pry"
 class DistrictRepository
 
 attr_reader :districts
-            :data
+            :enrollment_repository
 
   def initialize
     @districts               = Hash.new
-    # @enrollment_repository   = Enrollment.new
+    @enrollment_repository   = EnrollmentRepository.new
   end
 
   def load_data(data)
     files = data[:enrollment]
     create_repository(files)
+    @enrollment_repository.load_data(data)
   end
 
   def create_repository(files)
@@ -41,7 +42,6 @@ attr_reader :districts
   end
 
   def find_by_name(name)
-    #name = Scrubber.clean_data(nam)
     if districts.has_key?(name.upcase) == true
       districts[name.upcase]
       # else ERROR this isn't a real district
