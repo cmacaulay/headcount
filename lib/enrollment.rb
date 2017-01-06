@@ -6,7 +6,7 @@ class Enrollment
               :kindergarten_participation,
               :high_school_graduation
 
-  def initialize(args)
+  def initialize(data)
     @name = data[:name].upcase
     @kindergarten_participation =
       data[:kindergarten_participation]
