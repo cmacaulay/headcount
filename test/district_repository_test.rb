@@ -15,11 +15,10 @@ class DistrictRepositoryTest < Minitest::Test
         :kindergarten => "./test/fixtures/Kindergartners in full-day program.csv"
       }
       })
-      # district = dr.find_by_name("ACADEMY 20")
+      district = dr.find_by_name("ACADEMY 20")
+      assert_equal "ACADEMY 20", district.name
 
-      # assert_equal "ACADEMY 20", district.name
-
-      # assert_equal 7, dr.find_all_matching("WE").count
+      assert_equal 2, dr.find_all_matching("CO").count
     end
 
   def test_it_exists
@@ -27,18 +26,23 @@ class DistrictRepositoryTest < Minitest::Test
   end
 
   def test_new_hash_is_initialized
-    assert_equal Hash.new, @dr.districts
+    assert_equal Hash, @dr.districts.class
   end
 
-  def test_it_loads_file
+  def test_it_loads_file_and_will_find_by_name
     assert dr.districts.empty?
     load_data
     refute dr.districts.empty?
+    assert_equal "ACADEMY 20", @dr.find_by_name("ACADEMY 20").name
   end
 
-  def test_it_can_find_by_name
-    assert_equal nil, dr.find_by_name("french_fries")
-    assert_equal "ACADEMY 20", @dr.find_by_name("ACADEMY 20")
+  def test_it_will_find_all_matching
+    assert dr.districts.empty?
+    load_data
+    refute dr.districts.empty?
+
+    assert_equal "COLORADO", @dr.find_by_name("COLORADO").name
+    assert_equal ["COLORADO", "ADAMS COUNTY 14"], @dr.find_all_matching("co")
   end
 
 end
