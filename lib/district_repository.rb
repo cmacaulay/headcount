@@ -5,22 +5,22 @@ require "pry"
 class DistrictRepository
 
 attr_reader :districts
+            :data
 
   def initialize
-    @districts = Hash.new
+    @districts               = Hash.new
+    # @enrollment_repository   = Enrollment.new
   end
 
   def load_data(data)
     files = data[:enrollment]
     create_repository(files)
-    binding.pry
-
   end
 
   def create_repository(files)
     files.each do |key, file|
       data = load_csv(file)
-      save_districts(data)
+      save_districts(key, data)
     end
   end
 
@@ -30,22 +30,29 @@ attr_reader :districts
       header_converters: :symbol
   end
 
-  # def save_districts(file)
-  #   @districts = file.collect do |row|
-  #       district_name = row[:location].upcase
-  #       { district_name => District.new }
-  #   end
-  # end
-
-  def save_districts(file)
+  def save_districts(key, file)
 	    file.collect do |row|
-        district_name = row[:location].upcase
-        districts[district_name] = District.new #will over-write if it finds a duplicate district
+        districts[district_name(row)] = District.new({:name => district_name(row)}) #will over-write if it finds a duplicate district
 	  end
   end
 
+  def district_name(row)
+    row[:location].upcase
+  end
+
   def find_by_name(name)
-    districts.select{|key, value| value["#{district_name}"] == name}
+    #name = Scrubber.clean_data(nam)
+    if districts.has_key?(name.upcase) == true
+      districts[name.upcase]
+      # else ERROR this isn't a real district
+    end
+  end
+
+  def find_all_matching(name_fragment)
+    matches = districts.select do |district|
+      district.include?(name_fragment.upcase)
+    end
+    matches.keys
   end
 
 end
