@@ -9,7 +9,7 @@ class Enrollment
   def initialize(data)
     @name = data[:name].upcase
     @kindergarten = data[:kindergarten]
-    @high_school_graduation = data[:high_school_graduation_rates]
+    @high_school_graduation = data[:high_school_graduation]
     end
 
 end

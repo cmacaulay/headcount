@@ -10,7 +10,6 @@ class EnrollmentRepository
 
   def load_data(data_files)
     create_repository(files(data_files))
-    binding.pry
   end
 
   def files(data_files)
@@ -19,11 +18,18 @@ class EnrollmentRepository
 
   def create_repository(files)
     kindergarten_data(files).each_key do |district_name|
-      enrollments[district_name] = Enrollment.new( {
+      if files.has_key?(:high_school_graduation)
+        enrollments[district_name] = Enrollment.new( {
                       :name => district_name,
                       :kindergarten => (kindergarten_data(files))[district_name],
-                      :high_school_graduation_rates => (graduation_rates(files))[district_name]
+                      :high_school_graduation => (graduation_rates(files))[district_name]
                       } )
+      else
+        enrollments[district_name] = Enrollment.new( {
+                      :name => district_name,
+                      :kindergarten => (kindergarten_data(files))[district_name]
+                      } )
+      end
     end
   end
 
@@ -81,7 +87,6 @@ class EnrollmentRepository
   end
 
   def find_by_name(name)
-
-  end
-
+     enrollments[name.upcase]
+   end
   end
