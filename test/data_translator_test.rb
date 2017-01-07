@@ -8,10 +8,10 @@ class DataTranslatorTest < Minitest::Test
   def test_string_should_be_upcase
     data = DataTranslator.new
 
-    assert_equal "COLORADO", data.upcase_string("Colorado")
-    assert_equal "COLORADO", data.upcase_string("CoLoRaDo")
-    assert_equal "COLORADO", data.upcase_string("colorado")
-    assert_equal "COLORADO", data.upcase_string("colOrado  ")
+    assert_equal "COLORADO", data.upcase_name("Colorado")
+    assert_equal "COLORADO", data.upcase_name("CoLoRaDo")
+    assert_equal "COLORADO", data.upcase_name("colorado")
+    assert_equal "COLORADO", data.upcase_name("colOrado  ")
   end
 
   def test_number

@@ -1,8 +1,10 @@
 require_relative 'district'
+require "./lib/data_translator"
 require "csv"
 require "pry"
 
 class DistrictRepository
+  include DataTranslator
 
 attr_reader :districts
             :enrollment_repository

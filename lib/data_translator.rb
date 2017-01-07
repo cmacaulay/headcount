@@ -1,9 +1,9 @@
 require 'csv'
 
-class DataTranslator
+module DataTranslator
 
-    def upcase_string(data)
-      data.upcase.strip
+    def upcase_name(name)
+      name.upcase.strip
     end
 
     def format_number(number)
