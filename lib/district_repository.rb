@@ -14,9 +14,8 @@ attr_reader :districts
 
   def load_data(data)
     files = data[:enrollment]
-    create_repository(files)
-    # binding.p/ry
     @enrollment_repository.load_data(data)
+    create_repository(files)
   end
 
   def create_repository(files)
@@ -34,7 +33,7 @@ attr_reader :districts
 
   def save_districts(key, file)
 	    file.collect do |row|
-        districts[district_name(row)] = District.new({:name => district_name(row)}) #will over-write if it finds a duplicate district
+        districts[district_name(row)] = District.new({:name => district_name(row), :enrollment => @enrollment_repository.find_by_name(district_name(row)) }) #will over-write if it finds a duplicate district
 	  end
   end
 
