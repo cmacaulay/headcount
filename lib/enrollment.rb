@@ -18,6 +18,7 @@ class Enrollment
 
    def kindergarten_participation_in_year(year)
      kindergarten[year]
+     binding.pry
    end
 
 end
