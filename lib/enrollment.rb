@@ -8,8 +8,16 @@ class Enrollment
 
   def initialize(data)
     @name = data[:name].upcase
-    @kindergarten = data[:kindergarten]
+    @kindergarten = data[:kindergarten_participation]
     @high_school_graduation = data[:high_school_graduation]
     end
+
+    def kindergarten_participation_by_year
+     kindergarten
+   end
+
+   def kindergarten_participation_in_year(year)
+     kindergarten[year]
+   end
 
 end
