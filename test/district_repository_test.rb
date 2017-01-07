@@ -45,6 +45,7 @@ class DistrictRepositoryTest < Minitest::Test
 
     assert_equal "COLORADO", @dr.find_by_name("COLORADO").name
     assert_equal ["COLORADO", "ADAMS COUNTY 14"], @dr.find_all_matching("co")
+    binding.pry
   end
 
 end
