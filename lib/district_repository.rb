@@ -15,6 +15,7 @@ attr_reader :districts
   def load_data(data)
     files = data[:enrollment]
     create_repository(files)
+    # binding.p/ry
     @enrollment_repository.load_data(data)
   end
 
