@@ -1,7 +1,10 @@
 require 'csv'
 require_relative 'enrollment'
+require_relative 'data_translator'
 
 class EnrollmentRepository
+  include DataTranslator
+
   attr_reader :enrollments
 
   def initialize
@@ -47,11 +50,11 @@ class EnrollmentRepository
     end
   end
 
-  def load_csv(file)
-    CSV.open "#{file}",
-        headers:true,
-        header_converters: :symbol
-  end
+  # def load_csv(file)
+  #   CSV.open "#{file}",
+  #       headers:true,
+  #       header_converters: :symbol
+  # end
 
   def save_contents(contents)
     data = {}
@@ -65,10 +68,11 @@ class EnrollmentRepository
     data = initialize_new_key(district_name(row), data)
     data.fetch(district_name(row))[year(row)] = rate(row)
     data
+    # binding.pry
   end
 
   def district_name(row)
-    row[:location].upcase
+    upcase_name(row[:location])
   end
 
   def year(row)
@@ -76,7 +80,7 @@ class EnrollmentRepository
   end
 
   def rate(row)
-    row[:data]
+    format_number(row[:data])
   end
 
   def initialize_new_key(key, data)
