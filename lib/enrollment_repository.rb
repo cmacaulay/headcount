@@ -72,7 +72,7 @@ class EnrollmentRepository
   end
 
   def year(row)
-    row[:timeframe]
+    row[:timeframe].to_i
   end
 
   def rate(row)

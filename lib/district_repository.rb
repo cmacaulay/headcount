@@ -1,13 +1,15 @@
 require_relative 'district'
-require "./lib/data_translator"
+require_relative "data_translator"
+require_relative "enrollment_repository"
 require "csv"
 require "pry"
 
 class DistrictRepository
-  include DataTranslator
+  # include DataTranslator
 
-attr_reader :districts
-            :enrollment_repository
+attr_reader :enrollment_repository
+
+attr_accessor :districts
 
   def initialize
     @districts               = Hash.new
@@ -16,9 +18,8 @@ attr_reader :districts
 
   def load_data(data)
     files = data[:enrollment]
-    create_repository(files)
-    # binding.pry
     @enrollment_repository.load_data(data)
+    create_repository(files)
     binding.pry
   end
 
