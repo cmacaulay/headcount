@@ -68,7 +68,6 @@ class EnrollmentRepository
     data = initialize_new_key(district_name(row), data)
     data.fetch(district_name(row))[year(row)] = rate(row)
     data
-    # binding.pry
   end
 
   def district_name(row)

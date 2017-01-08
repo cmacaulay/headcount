@@ -1,7 +1,11 @@
 require_relative "district_repository"
+require_relative "data_translator"
 
 class HeadcountAnalyst
+  include DataTranslator
+
   attr_reader :district_repository
+
   def initialize(district_repository)
     @district_repository = district_repository.districts
   end
@@ -15,7 +19,7 @@ class HeadcountAnalyst
     against_district = district_repository.fetch(against_district.fetch(:against))
 
     rate = calculate_enrollment_average(first_district) / calculate_enrollment_average(against_district)
-    rate.round(3)
+    format_number(rate)
 
   end
 
@@ -24,9 +28,9 @@ class HeadcountAnalyst
     rates.map! do |rate|
       rate.to_f
     end
-    sum = rates.reduce(:+).round(3)
+    sum = format_number(rates.reduce(:+))
     average = sum / rates.count
-    average.round(3)
+    format_number(average)
     # sum of all the enrollment rates / # of yrs we have data for
   end
 
@@ -41,9 +45,9 @@ class HeadcountAnalyst
     first_district.merge(state_data) do |year, district_rate, state_rate|
       district_rate = district_rate.to_f
       state_rate    = state_rate.to_f
-      
+
       comparison = district_rate / state_rate
-      comparison.round(3)
+      format_number(comparison)
     end
   end
 
