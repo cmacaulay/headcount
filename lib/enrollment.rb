@@ -20,4 +20,12 @@ class Enrollment
      kindergarten[year]
    end
 
+   def graduation_participation_by_year
+     high_school_graduation
+   end
+
+   def graduation_rate_in_year(year)
+     high_school_graduation[year]
+   end
+
 end
