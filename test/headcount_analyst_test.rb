@@ -17,8 +17,8 @@ class HeadcountAnalystTest < Minitest::Test
     dr = DistrictRepository.new
     dr.load_data({:enrollment => {:kindergarten => "./test/fixtures/Kindergartners in full-day program.csv"}})
     hca = HeadcountAnalyst.new(dr)
-    assert_equal nil, hca.kindergarten_participation_rate_variation("ACADEMY 20", :against => "ADAMS COUNTY 14")
-    assert_equal nil, hca.kindergarten_participation_rate_variation("ACADEMY 20", :against => "COLORADO")
+    assert_equal 1.353, hca.kindergarten_participation_rate_variation("ACADEMY 20", :against => "ADAMS COUNTY 14")
+    assert_equal 0.766, hca.kindergarten_participation_rate_variation("ACADEMY 20", :against => "COLORADO")
   end
 
   # def test_enrollment_analysis_basics
