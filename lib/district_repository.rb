@@ -1,15 +1,12 @@
 require_relative 'district'
-require_relative "data_translator"
 require_relative "enrollment_repository"
 require "csv"
 require "pry"
 
 class DistrictRepository
-  # include DataTranslator
 
-attr_reader :enrollment_repository
-
-attr_accessor :districts
+attr_reader :districts
+            :enrollment_repository
 
   def initialize
     @districts               = Hash.new
@@ -20,7 +17,6 @@ attr_accessor :districts
     files = data[:enrollment]
     @enrollment_repository.load_data(data)
     create_repository(files)
-    binding.pry
   end
 
   def create_repository(files)
@@ -38,8 +34,8 @@ attr_accessor :districts
 
   def save_districts(key, file)
 	    file.collect do |row|
-        districts[district_name(row)] = District.new({:name => district_name(row)}) #will over-write if it finds a duplicate district
-    end
+        districts[district_name(row)] = District.new({:name => district_name(row), :enrollment => @enrollment_repository.find_by_name(district_name(row)) }) #will over-write if it finds a duplicate district
+	  end
   end
 
   def district_name(row)

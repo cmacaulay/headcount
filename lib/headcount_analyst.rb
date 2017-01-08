@@ -3,7 +3,8 @@ require_relative "district_repository"
 class HeadcountAnalyst
 
   def initialize(district_repository)
-    @district_repository = district_repository.districts
+    @district_repository = district_repository
+    binding.pry
   end
 
   def kindergarten_participation_rate_variation(fist_district, second_district)

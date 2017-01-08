@@ -27,7 +27,7 @@ class EnrollmentRepository
       else
         enrollments[district_name] = Enrollment.new( {
                       :name => district_name,
-                      :kindergarten => (kindergarten_data(files))[district_name]
+                      :kindergarten_participation => (kindergarten_data(files))[district_name]
                       } )
       end
     end
