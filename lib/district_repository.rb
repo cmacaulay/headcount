@@ -1,9 +1,11 @@
 require_relative 'district'
-require_relative "enrollment_repository"
+require_relative 'enrollment_repository'
+require_relative 'data_translator'
 require "csv"
 require "pry"
 
 class DistrictRepository
+  include DataTranslator
 
 attr_reader :districts
             :enrollment_repository
@@ -26,11 +28,11 @@ attr_reader :districts
     end
   end
 
-  def load_csv(file)
-    CSV.open "#{file}",
-      headers:true,
-      header_converters: :symbol
-  end
+  # def load_csv(file)
+  #   CSV.open "#{file}",
+  #     headers:true,
+  #     header_converters: :symbol
+  # end
 
   def save_districts(key, file)
 	    file.collect do |row|
@@ -39,7 +41,7 @@ attr_reader :districts
   end
 
   def district_name(row)
-    row[:location].upcase
+    upcase_name(row[:location])
   end
 
   def find_by_name(name)

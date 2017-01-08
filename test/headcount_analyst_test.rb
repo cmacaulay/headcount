@@ -17,7 +17,7 @@ class HeadcountAnalystTest < Minitest::Test
     dr = DistrictRepository.new
     dr.load_data({:enrollment => {:kindergarten => "./test/fixtures/Kindergartners in full-day program.csv"}})
     ha = HeadcountAnalyst.new(dr)
-    assert_equal 1.353, ha.kindergarten_participation_rate_variation("ACADEMY 20", :against => "ADAMS COUNTY 14")
+    assert_equal 1.357, ha.kindergarten_participation_rate_variation("ACADEMY 20", :against => "ADAMS COUNTY 14")
     assert_equal 0.766, ha.kindergarten_participation_rate_variation("ACADEMY 20", :against => "COLORADO")
   end
 
@@ -31,7 +31,22 @@ class HeadcountAnalystTest < Minitest::Test
     assert_equal expected, ha.kindergarten_participation_rate_variation_trend('ACADEMY 20', :against => 'COLORADO')
   end
 
+  def test_kindergarten_participation_against_high_school_graduation
+    skip
+    dr = DistrictRepository.new
+    dr.load_data({:enrollment => {
+      :kindergarten => "./test/fixtures/Kindergartners in full-day program.csv",
+      :high_school_graduation => "./test/fixtures/High school graduation rates.csv"
+      }})
+    ha = HeadcountAnalyst.new(dr)
+    # assert_equal , ha.kindergarten_participation_against_high_school_graduation('ACADEMY 20')
+    assert_equal 0.548, ha.kindergarten_participation_against_high_school_graduation('MONTROSE COUNTY RE-1J'), 0.005
+    assert_equal 0.800, ha.kindergarten_participation_against_high_school_graduation('STEAMBOAT SPRINGS RE-2'), 0.005
 
+    # kindergarten variation = kindergarten_participation/COLORADO average
+    # graduation variation = graduation_rates/COLORADO average
+    # kindergarten variation / graduation variation
+  end
   # def test_enrollment_analysis_basics
   #   dr = DistrictRepository.new
   #   dr.load_data({:enrollment => {:kindergarten => "./data/Kindergartners in full-day program.csv"}})

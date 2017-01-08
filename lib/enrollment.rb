@@ -1,13 +1,16 @@
 require_relative 'enrollment_repository'
+require_relative 'data_translator'
 require 'pry'
 
 class Enrollment
+  include DataTranslator
+
   attr_reader :name,
               :kindergarten,
               :high_school_graduation
 
   def initialize(data)
-    @name = data[:name].upcase
+    @name = upcase_name(data[:name])
     @kindergarten = data[:kindergarten_participation]
     @high_school_graduation = data[:high_school_graduation]
     end
