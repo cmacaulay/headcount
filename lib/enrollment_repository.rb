@@ -91,5 +91,6 @@ class EnrollmentRepository
 
   def find_by_name(name)
      enrollments[name.upcase]
-   end
   end
+  
+end
