@@ -21,7 +21,7 @@ class DistrictRepositoryTest < Minitest::Test
       assert_equal "ACADEMY 20", district.name
 
       assert_equal 2, dr.find_all_matching("CO").count
-    end
+  end
 
   def test_it_exists
     assert_instance_of DistrictRepository, @dr
