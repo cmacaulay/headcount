@@ -42,7 +42,6 @@ class EnrollmentRepository
 
   def graduation_rates(files)
     store_data(files, :high_school_graduation)
-    binding.pry
   end
 
   def store_data(files, key)
@@ -93,5 +92,5 @@ class EnrollmentRepository
   def find_by_name(name)
      enrollments[name.upcase]
   end
-  
+
 end

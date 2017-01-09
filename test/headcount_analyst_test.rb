@@ -33,6 +33,7 @@ class HeadcountAnalystTest < Minitest::Test
   end
 
   def test_kindergarten_participation_against_high_school_graduation
+    skip 
     dr = DistrictRepository.new
     dr.load_data({:enrollment => {
       :kindergarten => "./test/fixtures/Kindergartners in full-day program.csv",
