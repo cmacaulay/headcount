@@ -55,4 +55,17 @@ class HeadcountAnalyst
     enrollment_object.enrollment.kindergarten
   end
 
+  def kindergarten_participation_against_high_school_graduation(for_district)
+    #ha.kindergarten_participation_against_high_school_graduation('ACADEMY 20') # =>
+
+  end
+
+  def kindergarten_participation_correlates_with_high_school_graduation(for_district)
+    #ha.kindergarten_participation_correlates_with_high_school_graduation(:for => 'STATEWIDE') # => true
+  end
+
+  def kindergarten_participation_correlates_with_high_school_graduation(districts)
+    #ha.kindergarten_participation_correlates_with_high_school_graduation(
+  #:across => ['district_1', 'district_2', 'district_3', 'district_4']) # => true
+  end
 end
