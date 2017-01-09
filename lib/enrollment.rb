@@ -1,6 +1,4 @@
-require_relative 'enrollment_repository'
 require_relative 'data_translator'
-require 'pry'
 
 class Enrollment
   include DataTranslator
@@ -13,22 +11,22 @@ class Enrollment
     @name = upcase_name(data[:name])
     @kindergarten = data[:kindergarten_participation]
     @high_school_graduation = data[:high_school_graduation]
-    end
+  end
 
-    def kindergarten_participation_by_year
+  def kindergarten_participation_by_year
      kindergarten
-   end
+  end
 
-   def kindergarten_participation_in_year(year)
-     kindergarten[year]
-   end
+  def kindergarten_participation_in_year(year)
+    kindergarten[year]
+  end
 
-   def graduation_participation_by_year
-     high_school_graduation
-   end
+  def graduation_participation_by_year
+   high_school_graduation
+  end
 
-   def graduation_rate_in_year(year)
-     high_school_graduation[year]
-   end
+ def graduation_rate_in_year(year)
+   high_school_graduation[year]
+ end
 
 end

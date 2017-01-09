@@ -2,12 +2,11 @@ require_relative 'district'
 require_relative 'enrollment_repository'
 require_relative 'data_translator'
 require "csv"
-require "pry"
 
 class DistrictRepository
   include DataTranslator
 
-attr_reader :districts
+attr_reader :districts,
             :enrollment_repository
 
   def initialize
