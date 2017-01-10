@@ -56,12 +56,12 @@ class HeadcountAnalystTest < Minitest::Test
     assert_equal 0.573, ha.kindergarten_participation_rate_variation('ACADEMY 20', :against => 'ADAMS COUNTY 14')
     # assert_equal 0.766, ha.kindergarten_participation_against_high_school_graduation('ACADEMY 20')
 
-    # assert_equal true, ha.kindergarten_participation_correlates_with_high_school_graduation(for: 'ACADEMY 20')
-    # assert_equal false, ha.kindergarten_participation_correlates_with_high_school_graduation(for: 'BOULDER VALLEY RE 2')
-    # assert_equal true, ha.kindergarten_participation_correlates_with_high_school_graduation(for: 'STATEWIDE')
+    assert_equal true, ha.kindergarten_participation_correlates_with_high_school_graduation(for: 'ACADEMY 20')
+    assert_equal false, ha.kindergarten_participation_correlates_with_high_school_graduation(for: 'BOULDER VALLEY RE 2')
+    assert_equal true, ha.kindergarten_participation_correlates_with_high_school_graduation(for: 'STATEWIDE')
     assert_equal true, ha.kindergarten_participation_correlates_with_high_school_graduation(
-                        :across => ['district_1', 'district_2', 'district_3', 'district_4'])
-
+    #                     # :across => ['district_1', 'district_2', 'district_3', 'district_4'])
+                        :across => ['ACADEMY 20', 'ARICKAREE R-2', 'BOULDER VALLEY RE 2', 'BRUSH RE-2(J)'])
   end
 
 end
