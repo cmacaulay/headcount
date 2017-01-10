@@ -93,9 +93,14 @@ class HeadcountAnalyst
     correlation = district_repository.reject{|key| key == "COLORADO"}.map do |key, value|
                     kindergarten_participation_against_high_school_graduation(key)
                   end
-    statewide_correlation = (correlation.reduce(:+)) / (correlation.count)
-    format_number(statewide_correlation)
-    statewide_correlation > 0.7 ? true : false
+    correlation_count = correlation.map do |number|
+                          1.5 > number && number > 0.6 ? true : false
+                        end
+    true_count = correlation_count.count do |t|
+                  t == true
+                end
+
+    true_count > (correlation.count * 0.7) ? true : false
   end
 
   def multi_district_correlation(across_districts)
