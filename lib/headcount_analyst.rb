@@ -57,9 +57,11 @@ class HeadcountAnalyst
   def kindergarten_participation_against_high_school_graduation(for_district)
     district = district_repository.fetch(for_district)
     kindergarten_variation = calculate_kindergarten_variation(district)
-    format_number(kindergarten_variation)
+    graduation_variation = calculate_graduation_variation(district)
+    variance = kindergarten_variation / graduation_variation
+    format_number(variance)
     # graduation_variation   = graduation_rate / statewide_averate
-
+# kindergarten_variation / graduation_variation
     #ha.kindergarten_participation_against_high_school_graduation('ACADEMY 20') # =>
 
   end
@@ -67,21 +69,68 @@ class HeadcountAnalyst
   def calculate_kindergarten_variation(district)
     state  = district_repository.fetch("COLORADO")
     calculate_enrollment_average(district) / calculate_enrollment_average(state)
-    # binding.pry
+  end
+
+  def calculate_graduation_variation(district)
+    state = district_repository.fetch("COLORADO")
+    calculate_hs_enrollment_average(district) / calculate_hs_enrollment_average(state)
+  end
+
+  def calculate_hs_enrollment_average(district)
+    if district.enrollment.high_school_graduation.nil?
+      rates = []
+    else
+      rates = district.enrollment.high_school_graduation.values
+    end
+    rates.map! do |rate|
+      rate.to_f
+      end
+    sum = format_number(rates.reduce(:+))
+    average = sum / rates.count
+    format_number(average)
+      # sum of all the enrollment rates / # of yrs we have data for
   end
 
   def kindergarten_participation_correlates_with_high_school_graduation(for_district)
-    for_district = district_repository.fetch(for_district.fetch(:for))
-    # kindergarten_participation_against_high_school_graduation(for_district) > 0.6
-    # else
-    # return false
-    #ha.kindergarten_participation_correlates_with_high_school_graduation(:for => 'STATEWIDE') # => true
+    if for_district[:for] != "STATEWIDE"
+      district_correlation(for_district)
+    elsif for_district[:for] == "STATEWIDE"
+      statewide_correlation
+    else for_district[:across]
+      multi_district_correlation(for_district)
+    end
 
+    #   for_district[:for] == "STATEWIDE" ? statewide_correlation : district_correlation(for_district)
+    # if for_district[:for] == "STATEWIDE"
+    #   for_district[:for] = "COLORADO"
+    #   correlation = kindergarten_participation_against_high_school_graduation(for_district[:for])
+    #   correlation > 0.7 ? true : false
+    #   # binding.pry
+    # else
+      # correlation = kindergarten_participation_against_high_school_graduation(for_district[:for])
+      # 1.5 > correlation && correlation > 0.6 ? true : false
+      # # end
   end
 
-  def kindergarten_participation_correlates_with_high_school_graduation(districts)
-    #ha.kindergarten_participation_correlates_with_high_school_graduation(
-  #:across => ['district_1', 'district_2', 'district_3', 'district_4']) # => true
+  def district_correlation(for_district)
+    correlation = kindergarten_participation_against_high_school_graduation(for_district[:for])
+    1.5 > correlation && correlation > 0.6 ? true : false
+#working
+  end
+
+  def statewide_correlation
+    correlation = district_repository.map do |key, value|
+      # next key if key == "COLORADO"
+      kindergarten_participation_against_high_school_graduation(key)
+    end
+    statewide_correlation = (correlation.reduce(:+)) / (correlation.count)
+    statewide_correlation > 0.7 ? true : false    # district_correlations.count(true).to_f / district_correlations.count > 0.70
+  end
+
+  def multi_district_correlation(for_district)
+    binding.pry
+    # correlation = for_district[across:]
+    # kindergarten_participation_against_high_school_graduation(for_district[across:])
   end
 
 end
