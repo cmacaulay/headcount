@@ -45,7 +45,6 @@ class HeadcountAnalyst
     first_district.merge(state_data) do |year, district_rate, state_rate|
       district_rate = district_rate.to_f
       state_rate    = state_rate.to_f
-
       comparison = district_rate / state_rate
       format_number(comparison)
     end
@@ -58,6 +57,7 @@ class HeadcountAnalyst
   def kindergarten_participation_against_high_school_graduation(for_district)
     district = district_repository.fetch(for_district)
     kindergarten_variation = calculate_kindergarten_variation(district)
+    format_number(kindergarten_variation)
     # graduation_variation   = graduation_rate / statewide_averate
 
     #ha.kindergarten_participation_against_high_school_graduation('ACADEMY 20') # =>
@@ -67,10 +67,16 @@ class HeadcountAnalyst
   def calculate_kindergarten_variation(district)
     state  = district_repository.fetch("COLORADO")
     calculate_enrollment_average(district) / calculate_enrollment_average(state)
+    # binding.pry
   end
 
   def kindergarten_participation_correlates_with_high_school_graduation(for_district)
+    for_district = district_repository.fetch(for_district.fetch(:for))
+    # kindergarten_participation_against_high_school_graduation(for_district) > 0.6
+    # else
+    # return false
     #ha.kindergarten_participation_correlates_with_high_school_graduation(:for => 'STATEWIDE') # => true
+
   end
 
   def kindergarten_participation_correlates_with_high_school_graduation(districts)
