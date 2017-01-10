@@ -30,7 +30,7 @@ class EnrollmentTest < Minitest::Test
    :high_school_graduation => {2010=>"0.724", 2011=>"0.739", 2012=>"0.75354", 2013=>"0.769", 2014=>"0.773"} } )
    all_years = {2010=>"0.724", 2011=>"0.739", 2012=>"0.75354", 2013=>"0.769", 2014=>"0.773"}
 
-   assert_equal all_years, e.graduation_participation_by_year
+   assert_equal all_years, e.graduation_rate_by_year
    assert_equal "0.724", e.graduation_rate_in_year(2010)
   end
 
