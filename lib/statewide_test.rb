@@ -31,7 +31,10 @@ class StatewideTest
         eighth_grade.merge!(data) do |year, original, addition|
           original.merge(addition)
       end
-
+    end
+     #<-
+    #how do I know what kind of data this is? Maybe need to pass in another arg that tells me?
+    # save the things
   end
 
 
