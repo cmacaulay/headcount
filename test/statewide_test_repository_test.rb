@@ -42,7 +42,6 @@ class StatewideTestingRepositoryTest < Minitest::Test
   end
 
   def test_it_can_load_all_of_the_data
-    skip
     str = StatewideTestingRepository.new
 
     assert str.statewide_tests.empty?

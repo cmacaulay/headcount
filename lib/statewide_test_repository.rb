@@ -77,5 +77,8 @@ class StatewideTestingRepository
   def race_ethnicity(row)
     row[:race_ethnicity]
   end
-  
+
+  def find_by_name(name)
+    statewide_tests[name.upcase]
+  end
 end
