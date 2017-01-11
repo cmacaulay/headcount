@@ -60,4 +60,7 @@ class StatewideTestingRepository
     format_number(row[:data])
   end
 
+  def find_by_name(district_name)
+    statewide_tests[district_name.upcase]
+  end
 end
