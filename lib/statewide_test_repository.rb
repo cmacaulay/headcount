@@ -2,7 +2,6 @@ require_relative 'statewide_test'
 
 class StatewideTestingRepository
     include DataTranslator
-
     attr_reader :statewide_tests
 
     def initialize
@@ -59,8 +58,6 @@ class StatewideTestingRepository
       end
     end
 
-    
-
     def test_type(row)
     row[:score]
   end
@@ -80,7 +77,5 @@ class StatewideTestingRepository
   def race_ethnicity(row)
     row[:race_ethnicity]
   end
-
-
-
+  
 end

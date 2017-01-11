@@ -1,7 +1,6 @@
 require './test/test_helper'
 require './lib/district_repository'
 require './lib/enrollment_repository'
-require './lib/statewide_test_repository'
 
 class DistrictRepositoryTest < Minitest::Test
 
@@ -16,6 +15,7 @@ class DistrictRepositoryTest < Minitest::Test
       :enrollment => {
         :kindergarten => "./test/fixtures/Kindergartners in full-day program.csv",
         :high_school_graduation => "./test/fixtures/High school graduation rates.csv"
+<<<<<<< HEAD
       },
       :statewide_testing => {
         :third_grade => "./data/3rd grade students scoring proficient or above on the CSAP_TCAP.csv",
@@ -23,12 +23,18 @@ class DistrictRepositoryTest < Minitest::Test
         :math => "./data/Average proficiency on the CSAP_TCAP by race_ethnicity_ Math.csv",
         :reading => "./data/Average proficiency on the CSAP_TCAP by race_ethnicity_ Reading.csv",
         :writing => "./data/Average proficiency on the CSAP_TCAP by race_ethnicity_ Writing.csv"
+=======
+>>>>>>> edeb0952000f084a24e9754a74b0f6682687fe15
       }
       })
       district = dr.find_by_name("ACADEMY 20")
       assert_equal "ACADEMY 20", district.name
 
+<<<<<<< HEAD
       assert_equal 33, dr.find_all_matching("CO").count
+=======
+      assert_equal 2, dr.find_all_matching("CO").count
+>>>>>>> edeb0952000f084a24e9754a74b0f6682687fe15
   end
 
   def test_it_exists
@@ -50,9 +56,15 @@ class DistrictRepositoryTest < Minitest::Test
     assert dr.districts.empty?
     load_data
     refute dr.districts.empty?
+<<<<<<< HEAD
     expected = ["COLORADO", "ADAMS COUNTY 14", "ARCHULETA COUNTY 50 JT", "CHEYENNE COUNTY RE-5", "COLORADO SPRINGS 11", "COTOPAXI RE-3", "CREEDE CONSOLIDATED 1", "CROWLEY COUNTY RE-1-J", "CUSTER COUNTY SCHOOL DISTRICT C-1", "DELTA COUNTY 50(J)", "DENVER COUNTY 1", "DOLORES COUNTY RE NO.2", "DOUGLAS COUNTY RE 1", "EAGLE COUNTY RE 50", "EAST YUMA COUNTY RJ-2", "ELLICOTT 22", "FALCON 49", "GILPIN COUNTY RE-1", "HINSDALE COUNTY RE 1", "JEFFERSON COUNTY R-1", "LAKE COUNTY R-1", "MANCOS RE-6", "MESA COUNTY VALLEY 51", "MOFFAT COUNTY RE:NO 1", "MONTEZUMA-CORTEZ RE-1", "MONTROSE COUNTY RE-1J", "NORTH CONEJOS RE-1J", "PARK COUNTY RE-2", "PUEBLO COUNTY RURAL 70", "SOUTH CONEJOS RE-10", "WELD COUNTY RE-1", "WELD COUNTY S/D RE-8", "WEST YUMA COUNTY RJ-1"]
     assert_equal "COLORADO", @dr.find_by_name("COLORADO").name
     assert_equal expected, @dr.find_all_matching("co")
+=======
+
+    assert_equal "COLORADO", @dr.find_by_name("COLORADO").name
+    assert_equal ["COLORADO", "ADAMS COUNTY 14"], @dr.find_all_matching("co")
+>>>>>>> edeb0952000f084a24e9754a74b0f6682687fe15
   end
 
   # def test_district_repo

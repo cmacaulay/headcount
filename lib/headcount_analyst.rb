@@ -14,7 +14,9 @@ class HeadcountAnalyst
     first_district = district_repository.fetch(first_district)
     against_district = district_repository.fetch(against_district.fetch(:against))
 
-    rate = calculate_enrollment_average(first_district) / calculate_enrollment_average(against_district)
+    rate =
+    calculate_enrollment_average(first_district) /
+    calculate_enrollment_average(against_district)
     format_number(rate)
   end
 

@@ -2,14 +2,12 @@ require_relative 'data_translator'
 
 class StatewideTest
   include DataTranslator
-
   attr_accessor :name,
                 :third_grade,
                 :eighth_grade,
                 :math,
                 :reading,
                 :writing
-
 
   def initialize(data)
     @name = upcase_name(data[:name])
@@ -57,5 +55,12 @@ class StatewideTest
       end
   end
 
+  def proficient_by_grade(grade)
+    if grade == 3
+      third_grade
+    else grade == 8
+      eighth_grade
+    end
+  end
 
 end
