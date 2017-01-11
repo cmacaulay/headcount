@@ -2,7 +2,6 @@ require_relative 'statewide_test'
 
 class StatewideTestingRepository
     include DataTranslator
-
     attr_reader :statewide_tests
 
     def initialize
@@ -21,11 +20,11 @@ class StatewideTestingRepository
       end
     end
 
-    def store_data(grade_level, file)
-      if grade_level == :third_grade || :eighth_grade
-        grade_level_data( (load_csv(file)), grade_level )
-      elsif
-        subject_level_data( load_csv(file), grade_level )
+    def store_data(key, file)
+      if key == :third_grade || key == :eighth_grade
+        grade_level_data( (load_csv(file)), key )
+      else
+        subject_data( load_csv(file), key )
       end
     end
 
@@ -36,6 +35,21 @@ class StatewideTestingRepository
         test_type = test_type(row)
         test_average = test_average(row)
         row_data = { :name => district_name, grade_level => {year => {test_type => test_average}}}
+        if !@statewide_tests[district_name]
+          @statewide_tests[district_name] = StatewideTest.new(row_data)
+        else
+          @statewide_tests[district_name].add_new_data(row_data)
+        end
+      end
+    end
+
+    def subject_data(test_data, subject)
+      test_data.each do |row|
+        district_name = district_name(row)
+        year = year(row)
+        race_ethnicity = race_ethnicity(row)
+        test_average = test_average(row)
+        row_data = { :name => district_name, subject => {year => {race_ethnicity => test_average}}}
         if !@statewide_tests[district_name]
           @statewide_tests[district_name] = StatewideTest.new(row_data)
         else
@@ -60,7 +74,8 @@ class StatewideTestingRepository
     format_number(row[:data])
   end
 
-  def find_by_name(district_name)
-    statewide_tests[district_name.upcase]
+  def race_ethnicity(row)
+    row[:race_ethnicity]
   end
+  
 end
