@@ -14,26 +14,26 @@
       <img src="./assets/0.10.0/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2017-01-10T14:23:32-07:00">2017-01-10T14:23:32-07:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2017-01-10T15:09:27-07:00">2017-01-10T15:09:27-07:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
         <div class="file_list_container" id="AllFiles">
   <h2>
     <span class="group_name">All Files</span>
-    (<span class="covered_percent"><span class="green">94.38%</span></span>
+    (<span class="covered_percent"><span class="green">94.44%</span></span>
      covered at
      <span class="covered_strength">
        <span class="green">
-         39180.39
+         38747.05
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>6</b> files in total.
-    <b>178</b> relevant lines. 
-    <span class="green"><b>168</b> lines covered</span> and
+    <b>180</b> relevant lines. 
+    <span class="green"><b>170</b> lines covered</span> and
     <span class="red"><b>10</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -57,7 +57,7 @@
         <td>9</td>
         <td>9</td>
         <td>0</td>
-        <td>177148.6</td>
+        <td>177148.4</td>
       </tr>
       
       <tr>
@@ -102,10 +102,10 @@
       
       <tr>
         <td class="strong"><a href="#5ac5c3ddbda1de36b204662383b44f5108de2f82" class="src_link" title="lib/headcount_analyst.rb">lib/headcount_analyst.rb</a></td>
-        <td class="green strong">98.55 %</td>
-        <td>110</td>
-        <td>69</td>
-        <td>68</td>
+        <td class="green strong">98.59 %</td>
+        <td>121</td>
+        <td>71</td>
+        <td>70</td>
         <td>1</td>
         <td>180.1</td>
       </tr>
@@ -230,8 +230,8 @@
           <code class="ruby">    def format_number(number)</code>
         </li>
       
-        <li class="covered" data-hits="529310" data-linenumber="16">
-          <span class="hits">529310</span>
+        <li class="covered" data-hits="529309" data-linenumber="16">
+          <span class="hits">529309</span>
           
           <code class="ruby">      number.to_s[0..4].to_f</code>
         </li>
@@ -1521,10 +1521,10 @@
         <div class="source_table" id="5ac5c3ddbda1de36b204662383b44f5108de2f82">
   <div class="header">
     <h3>lib/headcount_analyst.rb</h3>
-    <h4><span class="green">98.55 %</span> covered</h4>
+    <h4><span class="green">98.59 %</span> covered</h4>
     <div>
-      <b>69</b> relevant lines. 
-      <span class="green"><b>68</b> lines covered</span> and
+      <b>71</b> relevant lines. 
+      <span class="green"><b>70</b> lines covered</span> and
       <span class="red"><b>1</b> lines missed.</span>
     </div>
   </div>
@@ -2105,88 +2105,154 @@
         <li class="covered" data-hits="1" data-linenumber="96">
           <span class="hits">1</span>
           
-          <code class="ruby">    statewide_correlation = (correlation.reduce(:+)) / (correlation.count)</code>
+          <code class="ruby">    correlation_count = correlation.map do |number|</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="97">
+        <li class="covered" data-hits="180" data-linenumber="97">
+          <span class="hits">180</span>
+          
+          <code class="ruby">                          1.5 &gt; number &amp;&amp; number &gt; 0.6 ? true : false</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="98">
+          
+          
+          <code class="ruby">                        end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="99">
           <span class="hits">1</span>
           
-          <code class="ruby">    format_number(statewide_correlation)</code>
+          <code class="ruby">    true_count = correlation_count.count do |t|</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="98">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="180" data-linenumber="100">
+          <span class="hits">180</span>
           
-          <code class="ruby">    statewide_correlation &gt; 0.7 ? true : false</code>
+          <code class="ruby">                  t == true</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="99">
+        <li class="never" data-hits="" data-linenumber="101">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">                end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="100">
+        <li class="never" data-hits="" data-linenumber="102">
           
           
           <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="101">
-          <span class="hits">1</span>
-          
-          <code class="ruby">  def multi_district_correlation(across_districts)</code>
-        </li>
-      
-        <li class="covered" data-hits="1" data-linenumber="102">
-          <span class="hits">1</span>
-          
-          <code class="ruby">    districts = across_districts[:across]</code>
         </li>
       
         <li class="covered" data-hits="1" data-linenumber="103">
           <span class="hits">1</span>
           
-          <code class="ruby">    correlation = districts.map do |district|</code>
+          <code class="ruby">    true_count &gt; (correlation.count * 0.7) ? true : false</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="104">
-          <span class="hits">4</span>
+        <li class="never" data-hits="" data-linenumber="104">
           
-          <code class="ruby">                    kindergarten_participation_against_high_school_graduation(district)</code>
+          
+          <code class="ruby">    </code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="105">
           
           
-          <code class="ruby">                  end</code>
+          <code class="ruby">    # statewide_correlation = true_count / (correlation.count)</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="106">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="106">
           
-          <code class="ruby">    multi_district_correlation = (correlation.reduce(:+)) / (correlation.count)</code>
+          
+          <code class="ruby">    # binding.pry</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="107">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="107">
           
-          <code class="ruby">    multi_district_correlation &gt; 0.7 ? true : false</code>
+          
+          <code class="ruby">    # format_number(statewide_correlation)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="108">
           
           
-          <code class="ruby">  end</code>
+          <code class="ruby">    # statewide_correlation &gt; 0.7 ? true : false</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="109">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    #if true count &lt; correlation.count *.7 FALSE</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="110">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="111">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="112">
+          <span class="hits">1</span>
+          
+          <code class="ruby">  def multi_district_correlation(across_districts)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="113">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    districts = across_districts[:across]</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="114">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    correlation = districts.map do |district|</code>
+        </li>
+      
+        <li class="covered" data-hits="4" data-linenumber="115">
+          <span class="hits">4</span>
+          
+          <code class="ruby">                    kindergarten_participation_against_high_school_graduation(district)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="116">
+          
+          
+          <code class="ruby">                  end</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="117">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    multi_district_correlation = (correlation.reduce(:+)) / (correlation.count)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="118">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    multi_district_correlation &gt; 0.7 ? true : false</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="119">
+          
+          
+          <code class="ruby">  end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="120">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="121">
           
           
           <code class="ruby">end</code>
