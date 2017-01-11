@@ -122,6 +122,27 @@ class StatewideTestTest < Minitest::Test
 
     actual = statewide_test.proficient_by_race_or_ethnicity(:asian)
     assert_equal expected, actual
+  def test_proficient_by_grade
+    row_1 = { :name => "ACADEMY 20", :third_grade => {2008 => {"Math" => 0.64}}}
+    row_2 = { :name => "ACADEMY 20", :third_grade => {2008 => {"Reading" => 0.4}}}
+    row_3 = { :name => "ACADEMY 20", :third_grade => {2009 => {"Math" => 0.09}}}
+
+    row_4 = { :name => "ACADEMY 20", :eighth_grade => {2008 => {"Math" => 0.88}}}
+    row_5 = { :name => "ACADEMY 20", :eighth_grade => {2008 => {"Reading" => 0.53}}}
+    row_6 = { :name => "ACADEMY 20", :eighth_grade => {2009 => {"Math" => 0.76}}}
+
+    st = StatewideTest.new(row_1)
+    st.add_new_data(row_2)
+    st.add_new_data(row_3)
+    st.add_new_data(row_4)
+    st.add_new_data(row_5)
+    st.add_new_data(row_6)
+
+    third_grade = {2008=>{"Math"=>0.64, "Reading"=>0.4}, 2009=>{"Math"=>0.09}}
+    eighth_grade = {2008=>{"Math"=>0.88, "Reading"=>0.53}, 2009=>{"Math"=>0.76}}
+    assert_equal third_grade, st.proficient_by_grade(3)
+    assert_equal eighth_grade, st.proficient_by_grade(8)
+    # assert_raises(UnknownDataError), st.proficient_by_grade(99)
   end
 
 end
