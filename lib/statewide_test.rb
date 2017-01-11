@@ -55,10 +55,6 @@ class StatewideTest
           original.merge(addition)
         end
       end
-
-     #<-
-    #how do I know what kind of data this is? Maybe need to pass in another arg that tells me?
-    # save the things
   end
 
 
