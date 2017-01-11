@@ -1,6 +1,7 @@
 require_relative 'test_helper.rb'
 require "./lib/headcount_analyst"
 require "./lib/district_repository"
+require "./lib/statewide_test_repository"
 require 'pry'
 
 
