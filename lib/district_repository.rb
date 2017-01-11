@@ -15,13 +15,13 @@ attr_reader :districts,
     @districts               = Hash.new
     @enrollment_repository   = EnrollmentRepository.new
     @statewide_testing_repository = StatewideTestingRepository.new
-    @economic_profile_repository = EconomicProfileRepository.new
+    # @economic_profile_repository = EconomicProfileRepository.new
   end
 
   def load_data(data)
     @enrollment_repository.load_data(data)
     @statewide_testing_repository.load_data(data)
-    @economic_profile_repository.load_data(data)
+    # @economic_profile_repository.load_data(data)
     data.each_key do |key|
       create_repository(data[key])
     end

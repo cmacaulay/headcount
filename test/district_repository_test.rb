@@ -29,7 +29,6 @@ class DistrictRepositoryTest < Minitest::Test
       assert_equal "ACADEMY 20", district.name
 
       assert_equal 33, dr.find_all_matching("CO").count
-      assert_equal 2, dr.find_all_matching("CO").count
   end
 
   def test_it_exists
@@ -60,7 +59,7 @@ class DistrictRepositoryTest < Minitest::Test
     assert_equal expected, @dr.find_all_matching("co")
 
     assert_equal "COLORADO", @dr.find_by_name("COLORADO").name
-    assert_equal ["COLORADO", "ADAMS COUNTY 14"], @dr.find_all_matching("co")
+    assert_equal expected, @dr.find_all_matching("co")
   end
 
   def test_district_repo
