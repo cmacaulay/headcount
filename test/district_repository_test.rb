@@ -11,6 +11,7 @@ class DistrictRepositoryTest < Minitest::Test
   end
 
   def load_data
+    skip
     dr.load_data({
       :enrollment => {
         :kindergarten => "./test/fixtures/Kindergartners in full-day program.csv",
@@ -32,14 +33,17 @@ class DistrictRepositoryTest < Minitest::Test
   end
 
   def test_it_exists
+    skip
     assert_instance_of DistrictRepository, @dr
   end
 
   def test_new_hash_is_initialized
+    skip
     assert_equal Hash, @dr.districts.class
   end
 
   def test_it_loads_file_and_will_find_by_name
+    skip
     assert dr.districts.empty?
     load_data
     refute dr.districts.empty?
@@ -47,6 +51,7 @@ class DistrictRepositoryTest < Minitest::Test
   end
 
   def test_it_will_find_all_matching
+    skip
     assert dr.districts.empty?
     load_data
     refute dr.districts.empty?
@@ -58,20 +63,20 @@ class DistrictRepositoryTest < Minitest::Test
     assert_equal ["COLORADO", "ADAMS COUNTY 14"], @dr.find_all_matching("co")
   end
 
-  # def test_district_repo
-  #     dr = DistrictRepository.new
-  #     dr.load_data({:enrollment => {
-  #                     :kindergarten => "./data/Kindergartners in full-day program.csv",
-  #                     :high_school_graduation => "./data/High school graduation rates.csv",
-  #                    },
-  #                    :statewide_testing => {
-  #                      :third_grade => "./data/3rd grade students scoring proficient or above on the CSAP_TCAP.csv",
-  #                      :eighth_grade => "./data/8th grade students scoring proficient or above on the CSAP_TCAP.csv",
-  #                      :math => "./data/Average proficiency on the CSAP_TCAP by race_ethnicity_ Math.csv",
-  #                      :reading => "./data/Average proficiency on the CSAP_TCAP by race_ethnicity_ Reading.csv",
-  #                      :writing => "./data/Average proficiency on the CSAP_TCAP by race_ethnicity_ Writing.csv"
-  #                    }
-  #                  })
-  #     dr
-  #   end
+  def test_district_repo
+      dr = DistrictRepository.new
+      dr.load_data({:enrollment => {
+                      :kindergarten => "./data/Kindergartners in full-day program.csv",
+                      :high_school_graduation => "./data/High school graduation rates.csv",
+                     },
+                     :statewide_testing => {
+                       :third_grade => "./data/3rd grade students scoring proficient or above on the CSAP_TCAP.csv",
+                       :eighth_grade => "./data/8th grade students scoring proficient or above on the CSAP_TCAP.csv",
+                       :math => "./data/Average proficiency on the CSAP_TCAP by race_ethnicity_ Math.csv",
+                       :reading => "./data/Average proficiency on the CSAP_TCAP by race_ethnicity_ Reading.csv",
+                       :writing => "./data/Average proficiency on the CSAP_TCAP by race_ethnicity_ Writing.csv"
+                     }
+                   })
+      dr
+    end
 end

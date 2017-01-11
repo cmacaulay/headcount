@@ -99,7 +99,46 @@ class StatewideTestTest < Minitest::Test
     third_grade = {2008=>{"Math"=>0.64, "Reading"=>0.4}, 2009=>{"Math"=>0.09}}
     eighth_grade = {2008=>{"Math"=>0.88, "Reading"=>0.53}, 2009=>{"Math"=>0.76}}
     assert_equal third_grade, st.proficient_by_grade(3)
-    assert_equal eighth_grade, st.proficient_by_grade(4)
+    assert_equal eighth_grade, st.proficient_by_grade(8)
+    assert_raises(UnknownDataError), st.proficient_by_grade(99)
+  end
+
+  def test_proficient_by_race_or_ethnicity
+    row_1 = { :name => "ACADEMY 20", :third_grade => {2008 => {"Math" => 0.64}}}
+    row_11 = { :name => "ACADEMY 20", :third_grade => {2009 => {"Writing" => 0.77}}}
+    row_2 = { :name => "ACADEMY 20", :eighth_grade => {2008 => {"Reading" => 0.4}}}
+    row_22 = { :name => "ACADEMY 20", :eighth_grade => {2010 => {"Math" => 0.4}}}
+    row_3 = { :name => "ACADEMY 20", :math => {2009 => {"Black" => 0.99}}}
+    row_33 = { :name => "ACADEMY 20", :math => {2011 => {"Asian" => 0.77}}}
+    row_4 = { :name => "ACADEMY 20", :reading => {2009 => {"White" => 0.60}}}
+    row_44 = { :name => "ACADEMY 20", :reading => {2015 => {"Black" => 0.50}}}
+    row_5 = { :name => "ACADEMY 20", :writing => {2009 => {"Native American" => 0.59}}}
+    row_55 = { :name => "ACADEMY 20", :writing => {2010 => {"Hispanic" => 0.19}}}
+
+    st = StatewideTest.new(row_1)
+    st.add_new_data(row_2)
+    st.add_new_data(row_3)
+    st.add_new_data(row_4)
+    st.add_new_data(row_5)
+    st.add_new_data(row_11)
+    st.add_new_data(row_22)
+    st.add_new_data(row_33)
+    st.add_new_data(row_44)
+    st.add_new_data(row_55)
+
+    third_grade  = {2008=>{"Math"=>0.64}, 2009=>{"Writing"=>0.77}}
+    eighth_grade = {2008=>{"Reading"=>0.4}, 2010=>{"Math"=>0.4}}
+    math         = {2009=>{"Black"=>0.99}, 2011=>{"Asian"=>0.77}}
+    reading      = {2009=>{"White"=>0.60}, 2015=>{"Black"=>0.50}}
+    writing      = {2009=>{"Native American"=>0.59}, 2010=>{"Hispanic"=>0.19}}
+
+    assert_equal third_grade, st.third_grade
+    assert_equal eighth_grade, st.eighth_grade
+    assert_equal math, st.math
+    assert_equal reading, st.reading
+    assert_equal writing, st.writing
+
+    st.proficient_by_race_or_ethnicity(:asian)
   end
 
 
