@@ -17,10 +17,8 @@ class EconomicProfileRepositoryTest < Minitest::Test
     :children_in_poverty => "./data/School-aged children in poverty.csv",
     :free_or_reduced_price_lunch => "./data/Students qualifying for free or reduced price lunch.csv",
     :title_i => "./data/Title I students.csv"
-  }
-})
-
-# ep = epr.find_by_name("ACADEMY 20")
+    }
+  })
   end
 
 end
