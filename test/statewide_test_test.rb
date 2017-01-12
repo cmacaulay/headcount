@@ -145,10 +145,6 @@ class StatewideTestTest < Minitest::Test
 
       assert_equal 0.09, st.proficient_for_subject_by_grade_in_year(:math, 3, 2009)
       assert_equal 0.53, st.proficient_for_subject_by_grade_in_year(:reading, 8, 2008)
-<<<<<<< HEAD
-=======
-
->>>>>>> 246e24b4962ecf27d014555f4b1d5973bb27a8a8
   end
 
   def test_it_extracts_proficiency_by_race_or_ethnicity_data
