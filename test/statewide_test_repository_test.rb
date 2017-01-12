@@ -1,16 +1,16 @@
 require_relative 'test_helper'
 require './lib/statewide_test_repository'
 
-class StatewideTestingRepositoryTest < Minitest::Test
+class StatewideTestRepositoryTest < Minitest::Test
 
   def test_it_exists
-    str = StatewideTestingRepository.new
-    assert_equal StatewideTestingRepository, str.class
-    assert_instance_of StatewideTestingRepository, str
+    str = StatewideTestRepository.new
+    assert_equal StatewideTestRepository, str.class
+    assert_instance_of StatewideTestRepository, str
   end
 
   def test_it_loads_data
-    str = StatewideTestingRepository.new
+    str = StatewideTestRepository.new
 
     assert_instance_of Hash, str.statewide_tests
     assert str.statewide_tests.empty?
@@ -25,7 +25,7 @@ class StatewideTestingRepositoryTest < Minitest::Test
   end
 
   def test_it_finds_by_name_and_can_pull_specific_data
-    str = StatewideTestingRepository.new
+    str = StatewideTestRepository.new
 
     assert str.statewide_tests.empty?
     str.load_data({
@@ -36,13 +36,13 @@ class StatewideTestingRepositoryTest < Minitest::Test
     })
 
     assert_instance_of StatewideTest, str.find_by_name("ACADEMY 20")
-    expected = {"Math"=>0.857, "Reading"=>0.866, "Writing"=>0.671}
+    expected = {:math=>0.857, :reading=>0.866, :writing=>0.671}
     academy_20_data = str.find_by_name("ACADEMY 20")
     assert_equal expected, academy_20_data.third_grade[2008]
   end
 
   def test_it_can_load_all_of_the_data
-    str = StatewideTestingRepository.new
+    str = StatewideTestRepository.new
 
     assert str.statewide_tests.empty?
     str.load_data({

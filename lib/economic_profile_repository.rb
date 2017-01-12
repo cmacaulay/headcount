@@ -32,8 +32,7 @@ class EconomicProfileRepository
     economic_data.each do |row|
       district_name = row[:location]
       income        = row[:data].to_i
-      years = row[:timeframe].split("-").map
-          { |num| num.to_i }
+      years = row[:timeframe].split("-").map{ |num| num.to_i }
       row_data = { :name => district_name, economic_indicator =>
                     {years => income }}
         if !@economic_profiles[district_name]
