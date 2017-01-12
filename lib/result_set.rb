@@ -1,24 +1,14 @@
 require_relative 'result_entry'
+require_relative 'headcount_analyst'
 
-#this object aggregates and provides an interface
-#/ access to the given results
 class ResultSet
-  att
+  attr_reader :matching_districts,
+              :statewide_average
 
-  def matching_districts
-    []
-    #returns an array of result entry objects
-    # what is matching?
+  def initialize(data)
+    @matching_districts = data[:matching_districts]
+    @statewide_average  = data[:statewide_average]
   end
 
-  def statewide_average
-    #returns a single ResultEntry object
-    #that represents the average accross the state
-    # most likely for the different economic indicators
-    # :free_and_reduced_price_lunch_rate
-    # :children_in_poverty_rate
-    # :high_school_graduation_rate
-    # :median_household_income
-  end
 
 end

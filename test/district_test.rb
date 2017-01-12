@@ -61,7 +61,7 @@ class DistrictTest < Minitest::Test
 
     district = dr.find_by_name("ACADEMY 20")
 
-    assert_equal "ACADEMY 20", district.statewide_testing.name
+    assert_equal "ACADEMY 20", district.statewide_test.name
   end
 
   def test_relationship_between_district_and_economic_profile
