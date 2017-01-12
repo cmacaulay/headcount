@@ -3,6 +3,7 @@ require_relative 'result_entry'
 #this object aggregates and provides an interface
 #/ access to the given results
 class ResultSet
+  att
 
   def matching_districts
     []
