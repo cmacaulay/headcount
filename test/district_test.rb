@@ -1,7 +1,6 @@
 require_relative 'test_helper.rb'
 require './lib/district'
 require './lib/district_repository'
-require 'pry'
 
 class DistrictTest < Minitest::Test
 

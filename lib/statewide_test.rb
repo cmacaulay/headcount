@@ -23,39 +23,68 @@ class StatewideTest
     @writing = data[:writing]
   end
 
-  def add_new_data(row_data)
-    if row_data.has_key?(:third_grade)
-      data = row_data[:third_grade]
+  def store_third_grade(data)
+    if @third_grade == nil
+      @third_grade = data
+    else
       third_grade.merge!(data) do |year, original, addition|
         original.merge(addition)
       end
-    elsif eighth_grade == nil
-      @eighth_grade = row_data[:eighth_grade]
-    elsif
-      data = row_data[:eighth_grade]
+    end
+  end
+
+  def store_eighth_grade(data)
+    if @eighth_grade == nil
+      @eighth_grade = data
+    else
       eighth_grade.merge!(data) do |year, original, addition|
         original.merge(addition)
       end
-    elsif math == nil
-      @math = row_data[:math]
-    elsif row_data.has_key?(:math)
-      data = row_data[:math]
+    end
+  end
+
+  def store_math(data)
+    if @math === nil
+      @math = data
+    else
       math.merge!(data) do |year, original, addition|
         original.merge(addition)
       end
-    elsif reading == nil
-      @reading = row_data[:reading]
-    elsif row_data.has_key?(:reading)
-      data = row_data[:reading]
+    end
+  end
+
+  def store_reading(data)
+    if reading == nil
+      @reading = data
+    else
       reading.merge!(data) do |year, original, addition|
         original.merge(addition)
       end
-    elsif writing == nil
-      @writing = row_data[:writing]
-    else row_data.has_key?(:writing)
-      data = row_data[:writing]
+    end
+  end
+
+  def store_writing(data)
+    if writing == nil
+      @writing = data
+    else
       writing.merge!(data) do |year, original, addition|
         original.merge(addition)
+      end
+    end
+  end
+
+  def add_new_data(row_data)
+    row_data.each_key do |key|
+      if key == :third_grade
+        store_third_grade(row_data[key])
+      elsif key == :eighth_grade
+        store_eighth_grade(row_data[key])
+      elsif key == :math
+        store_math(row_data[key])
+      elsif key == :reading
+        store_reading(row_data[key])
+      elsif key == :writing
+        store_writing(row_data[key])
       end
     end
   end
