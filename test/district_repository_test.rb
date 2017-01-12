@@ -33,7 +33,7 @@ class DistrictRepositoryTest < Minitest::Test
       district = dr.find_by_name("ACADEMY 20")
       assert_equal "ACADEMY 20", district.name
 
-      assert_equal 33, dr.find_all_matching("CO").count
+      assert_equal 33, @dr.find_all_matching("CO").count
   end
 
   def test_it_exists
@@ -42,6 +42,14 @@ class DistrictRepositoryTest < Minitest::Test
 
   def test_new_hash_is_initialized
     assert_equal Hash, @dr.districts.class
+  end
+
+  def test_it_loads_the_repo_from_the_file
+    assert dr.districts.empty?
+
+    load_data
+
+    refute @dr.districts.empty?
   end
 
   def test_it_loads_file_and_will_find_by_name

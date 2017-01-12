@@ -85,7 +85,6 @@ class StatewideTestRepository
 
   def race_ethnicity(row)
     format_ethnicity(row[:race_ethnicity])
-    # binding.pry
   end
 
   def find_by_name(name)
