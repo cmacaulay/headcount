@@ -2,7 +2,7 @@ require_relative 'district'
 require_relative 'enrollment_repository'
 require_relative 'data_translator'
 require_relative 'statewide_test_repository'
-# require_relative 'economic_profile_repository'
+require_relative 'economic_profile_repository'
 
 class DistrictRepository
   include DataTranslator
@@ -15,16 +15,17 @@ attr_reader :districts,
     @districts               = Hash.new
     @enrollment_repository   = EnrollmentRepository.new
     @statewide_testing_repository = StatewideTestRepository.new
-    # @economic_profile_repository = EconomicProfileRepository.new
+    @economic_profile_repository = EconomicProfileRepository.new
   end
 
   def load_data(data)
     @enrollment_repository.load_data(data)
     @statewide_testing_repository.load_data(data)
-    # @economic_profile_repository.load_data(data)
+    @economic_profile_repository.load_data(data)
     data.each_key do |key|
       create_repository(data[key])
     end
+    binding.pry
   end
 
   def create_repository(files)
@@ -35,12 +36,13 @@ attr_reader :districts,
   end
 
   def save_districts(key, file)
-	  file.collect do |row|
+    file.collect do |row|
       districts[district_name(row)] = District.new({:name => district_name(row),
         :enrollment => @enrollment_repository.find_by_name(district_name(row)),
-        :statewide_testing => @statewide_testing_repository.find_by_name(district_name(row)),
-        # :economic_profile => @economic_profile.find_by_name(district_name(row))
-        }) #will over-write if it finds a duplicate district
+        :statewide_testing => @statewide_testing_repository.find_by_name
+          (district_name(row)),
+        :economic_profile => @economic_profile_repository.find_by_name
+          (district_name(row))})
     end
   end
 
