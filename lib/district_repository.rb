@@ -2,7 +2,7 @@ require_relative 'district'
 require_relative 'enrollment_repository'
 require_relative 'data_translator'
 require_relative 'statewide_test_repository'
-require "csv"
+require_relative 'economic_profile_repository'
 
 class DistrictRepository
   include DataTranslator
@@ -38,7 +38,8 @@ attr_reader :districts,
 	  file.collect do |row|
       districts[district_name(row)] = District.new({:name => district_name(row),
         :enrollment => @enrollment_repository.find_by_name(district_name(row)),
-        :statewide_testing => @statewide_testing_repository.find_by_name(district_name(row))
+        :statewide_testing => @statewide_testing_repository.find_by_name(district_name(row)),
+        :economic_profile => @economic_profile.find_by_name(district_name(row))
         }) #will over-write if it finds a duplicate district
     end
   end
