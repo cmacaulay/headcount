@@ -34,7 +34,11 @@ class StatewideTestingRepository
         year = year(row)
         test_type = test_type(row)
         test_average = test_average(row)
-        row_data = { :name => district_name, grade_level => {year => {test_type => test_average}}}
+        row_data =
+        { :name => district_name,
+          grade_level => {year =>
+          {test_type => test_average}
+        }}
         if !@statewide_tests[district_name]
           @statewide_tests[district_name] = StatewideTest.new(row_data)
         else
@@ -49,7 +53,12 @@ class StatewideTestingRepository
         year = year(row)
         race_ethnicity = race_ethnicity(row)
         test_average = test_average(row)
-        row_data = { :name => district_name, subject => {year => {race_ethnicity => test_average}}}
+        row_data =
+        {
+          :name => district_name,
+          subject => {year =>
+          {race_ethnicity => test_average}
+          }}
         if !@statewide_tests[district_name]
           @statewide_tests[district_name] = StatewideTest.new(row_data)
         else
