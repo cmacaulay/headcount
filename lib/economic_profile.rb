@@ -9,7 +9,7 @@ class EconomicProfile
                 :free_or_reduced_price_lunch
 
   def initialize(data)
-    @name = upcase_name(data[:name])
+    @name = data[:name]
     @median_household_income = data[:median_household_income]
     @children_in_poverty     = data[:children_in_poverty]
     @free_or_reduced_price_lunch = data[:free_or_reduced_price_lunch]
@@ -68,6 +68,41 @@ class EconomicProfile
         original.merge(addition)
       end
     end
+  end
+
+  def median_household_income_in_year(year)
+    average = []
+    median_household_income.each_key do |key|
+      if year.between?(key[0], key[1])
+        average << median_household_income[key]
+      end
+    end
+    average.reduce(:+) / average.count
+    end
+
+  def median_household_income_average
+    average = median_household_income.values.reduce(:+)
+    average / (median_household_income.values.count)
+  end
+
+  def children_in_poverty_in_year(year)
+    raise UnknownDataError if children_in_poverty[year].nil?
+    children_in_poverty[year]
+  end
+
+  def free_or_reduced_price_lunch_percentage_in_year(year)
+    raise UnknownDataError if free_or_reduced_price_lunch[year].nil?
+    format_number(free_or_reduced_price_lunch[year][:percentage])
+  end
+
+  def free_or_reduced_price_lunch_number_in_year(year)
+    raise UnknownDataError if free_or_reduced_price_lunch[year].nil?
+    free_or_reduced_price_lunch[year][:total]
+  end
+
+  def title_i_in_year(year)
+    raise UnknownDataError if title_i[year].nil?
+    title_i[year]
   end
 
 end
