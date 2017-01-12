@@ -25,7 +25,6 @@ attr_reader :districts,
     data.each_key do |key|
       create_repository(data[key])
     end
-    binding.pry
   end
 
   def create_repository(files)
@@ -39,10 +38,8 @@ attr_reader :districts,
     file.collect do |row|
       districts[district_name(row)] = District.new({:name => district_name(row),
         :enrollment => @enrollment_repository.find_by_name(district_name(row)),
-        :statewide_testing => @statewide_testing_repository.find_by_name
-          (district_name(row)),
-        :economic_profile => @economic_profile_repository.find_by_name
-          (district_name(row))})
+        :statewide_testing => @statewide_testing_repository.find_by_name(district_name(row)),
+        :economic_profile => @economic_profile_repository.find_by_name(district_name(row))})
     end
   end
 

@@ -37,17 +37,14 @@ class DistrictRepositoryTest < Minitest::Test
   end
 
   def test_it_exists
-    skip
     assert_instance_of DistrictRepository, @dr
   end
 
   def test_new_hash_is_initialized
-    skip
     assert_equal Hash, @dr.districts.class
   end
 
   def test_it_loads_file_and_will_find_by_name
-    skip
     assert dr.districts.empty?
     load_data
     refute dr.districts.empty?
