@@ -60,9 +60,26 @@ class EconomicProfileRepository
 
   def load_lunch_data(economic_data, economic_indicator)
     economic_data.each do |row|
-      if row[:dataformat] == "Eligible for Free or Reduced Lunch"
-      
+      if row[:poverty_level] == "Eligible for Free or Reduced Lunch"
+      district_name = row[:location]
+      year = row[:timeframe].to_i
+      rate          = determine_rate(row)
+      data_type = determine_data_type(row)
+      row_data = { :name => district_name, economic_indicator => {year => {data_type => rate } } }
+        if !@economic_profiles[district_name]
+          @economic_profiles[district_name] = EconomicProfile.new(row_data)
+        else
+          @economic_profiles[district_name].add_new_data(row_data)
+        end
       end
+    end
+  end
+
+  def determine_data_type(row)
+    if row[:dataformat] == "Percent"
+      :percentage
+    else
+      :total
     end
   end
 
