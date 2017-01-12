@@ -13,7 +13,6 @@ class EconomicProfileRepository
     if data.has_key?(:economic_profile)
     create_repository(data[:economic_profile])
     end
-    binding.pry
   end
 
   def create_repository(data)
@@ -61,7 +60,7 @@ class EconomicProfileRepository
   def load_lunch_data(economic_data, economic_indicator)
     economic_data.each do |row|
       if row[:dataformat] == "Eligible for Free or Reduced Lunch"
-      
+
       end
     end
   end

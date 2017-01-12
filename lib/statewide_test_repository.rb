@@ -59,7 +59,7 @@ class StatewideTestRepository
     end
 
     def test_type(row)
-    row[:score].to_sym
+    row[:score].downcase.to_sym
   end
 
   def district_name(row)

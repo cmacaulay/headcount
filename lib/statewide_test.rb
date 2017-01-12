@@ -116,6 +116,7 @@ class StatewideTest
   def proficient_for_subject_by_grade_in_year(subject, grade, year)
     if SUBJECTS.include?(subject)
       data = proficient_by_grade(grade)[year][subject]
+      data == 0.0 ? number = "N/A" : data
       format_number(data)
     else
       raise UnknownDataError
