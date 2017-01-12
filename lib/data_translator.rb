@@ -14,7 +14,6 @@ module DataTranslator
 
     def format_number(number)
       number.to_s[0..4].to_f
-      # (number.to_f * 1000).floor / 1000.0
     end
 
     def format_ethnicity(race)

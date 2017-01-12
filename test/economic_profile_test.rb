@@ -1,5 +1,4 @@
 require './test/test_helper'
-require 'pry'
 require './lib/economic_profile'
 
 class EconomicProfileTest < Minitest::Test
