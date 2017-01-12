@@ -14,7 +14,7 @@ attr_reader :districts,
   def initialize
     @districts               = Hash.new
     @enrollment_repository   = EnrollmentRepository.new
-    @statewide_testing_repository = StatewideTestingRepository.new
+    @statewide_testing_repository = StatewideTestRepository.new
     # @economic_profile_repository = EconomicProfileRepository.new
   end
 
@@ -25,7 +25,6 @@ attr_reader :districts,
     data.each_key do |key|
       create_repository(data[key])
     end
-    binding.pry
   end
 
   def create_repository(files)

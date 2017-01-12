@@ -1,6 +1,6 @@
 require_relative 'statewide_test'
 
-class StatewideTestingRepository
+class StatewideTestRepository
     include DataTranslator
     attr_reader :statewide_tests
 

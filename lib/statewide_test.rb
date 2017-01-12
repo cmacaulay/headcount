@@ -113,4 +113,22 @@ class StatewideTest
     end
   end
 
+  def proficient_for_subject_by_grade_in_year(subject, grade, year)
+    if SUBJECTS.include?(subject)
+      data = proficient_by_grade(grade)[year][subject]
+      format_number(data)
+    else
+      raise UnknownDataError
+    end
+  end
+
+  def proficient_for_subject_by_race_in_year(subject, race, year)
+    if RACES.include?(race) && SUBJECTS.include?(subject)
+      data = proficient_by_race_or_ethnicity(race)[year][subject]
+      format_number(data)
+    else
+      raise UnknownDataError
+    end
+  end
+
 end
