@@ -1,6 +1,6 @@
 require_relative 'statewide_test'
 
-class StatewideTestingRepository
+class StatewideTestRepository
     include DataTranslator
     attr_reader :statewide_tests
 
@@ -59,7 +59,7 @@ class StatewideTestingRepository
     end
 
     def test_type(row)
-    row[:score]
+    row[:score].downcase.to_sym
   end
 
   def district_name(row)
@@ -75,7 +75,8 @@ class StatewideTestingRepository
   end
 
   def race_ethnicity(row)
-    row[:race_ethnicity]
+    format_ethnicity(row[:race_ethnicity])
+    # binding.pry
   end
 
   def find_by_name(name)
