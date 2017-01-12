@@ -50,7 +50,6 @@ attr_reader :districts,
   def find_by_name(name)
     if districts.has_key?(name.upcase) == true
       districts[name.upcase]
-      # else ERROR this isn't a real district
     end
   end
 
