@@ -10,7 +10,9 @@ class HeadcountAnalyst
     @district_repository = district_repository.districts
   end
 
-  def kindergarten_participation_rate_variation(first_district, against_district)
+  def kindergarten_participation_rate_variation
+          (first_district, against_district)
+
     first_district = district_repository.fetch(first_district)
     against_district = district_repository.fetch(against_district.fetch(:against))
 

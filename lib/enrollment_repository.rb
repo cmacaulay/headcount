@@ -24,13 +24,16 @@ class EnrollmentRepository
       if files.has_key?(:high_school_graduation)
         enrollments[district_name] = Enrollment.new( {
                       :name => district_name,
-                      :kindergarten_participation => (kindergarten_data(files))[district_name],
-                      :high_school_graduation => (graduation_rates(files))[district_name]
+                      :kindergarten_participation =>
+                          (kindergarten_data(files))[district_name],
+                      :high_school_graduation =>
+                          (graduation_rates(files))[district_name]
                       } )
       else
         enrollments[district_name] = Enrollment.new( {
                       :name => district_name,
-                      :kindergarten_participation => (kindergarten_data(files))[district_name]
+                      :kindergarten_participation =>
+                          (kindergarten_data(files))[district_name]
                       } )
       end
     end
