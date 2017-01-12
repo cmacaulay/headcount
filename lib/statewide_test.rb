@@ -10,6 +10,10 @@ class StatewideTest
                 :reading,
                 :writing
 
+  RACES    =  [:asian, :black, :pacific_islander,
+               :hispanic, :native_american, :two_or_more, :white]
+  SUBJECTS =  [:math, :reading, :writing]
+
   def initialize(data)
     @name = upcase_name(data[:name])
     @third_grade = data[:third_grade]
@@ -68,6 +72,63 @@ class StatewideTest
 
 
   def proficient_by_race_or_ethnicity(race)
+    if RACES.include?(race)
+      race_hash = {}
+      extract_race_data_for_math(race, race_hash)
+      extract_race_data_for_reading(race, race_hash)
+      extract_race_data_for_writing(race, race_hash)
+      race_hash
+    else
+      raise UnknownRaceError
+    end
+  end
+
+  def extract_race_data_for_math(race, race_hash)
+    math.each do |year, race_to_score|
+      if race_hash[year].nil?
+        race_hash[year] = {math: race_to_score[race]}
+      else
+        race_hash[year].store(:math, race_to_score[race])
+      end
+    end
+  end
+
+  def extract_race_data_for_reading(race, race_hash)
+    reading.each do |year, race_to_score|
+      if race_hash[year].nil?
+        race_hash[year] = {reading: race_to_score[race]}
+      else
+        race_hash[year].store(:reading, race_to_score[race])
+      end
+    end
+  end
+
+  def extract_race_data_for_writing(race, race_hash)
+    writing.each do |year, race_to_score|
+      if race_hash[year].nil?
+        race_hash[year] = {writing: race_to_score[race]}
+      else
+        race_hash[year].store(:writing, race_to_score[race])
+      end
+    end
+  end
+
+  def proficient_for_subject_by_grade_in_year(subject, grade, year)
+    if SUBJECTS.include?(subject)
+      data = proficient_by_grade(grade)[year][subject]
+      data == 0.0 ? data = "N/A" : data
+    else
+      raise UnknownDataError
+    end
+  end
+
+  def proficient_for_subject_by_race_in_year(subject, race, year)
+    if RACES.include?(race) && SUBJECTS.include?(subject)
+      data = proficient_by_race_or_ethnicity(race)[year][subject]
+      format_number(data)
+    else
+      raise UnknownDataError
+    end
   end
 
 end
