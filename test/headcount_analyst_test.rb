@@ -55,7 +55,6 @@ class HeadcountAnalystTest < Minitest::Test
     ha = HeadcountAnalyst.new(dr)
 
     assert_equal 0.573, ha.kindergarten_participation_rate_variation('ACADEMY 20', :against => 'ADAMS COUNTY 14')
-    # assert_equal 0.766, ha.kindergarten_participation_against_high_school_graduation('ACADEMY 20')
 
     assert_equal true, ha.kindergarten_participation_correlates_with_high_school_graduation(for: 'ACADEMY 20')
     assert_equal false, ha.kindergarten_participation_correlates_with_high_school_graduation(for: 'BOULDER VALLEY RE 2')

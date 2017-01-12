@@ -9,7 +9,6 @@ class District
     def initialize(data)
         @name       = data[:name].upcase
         @enrollment = data[:enrollment]
-        # @statewide_test = data[:statewide_testing]
         @statewide_testing = data[:statewide_testing]
         @economic_profile  = data[:economic_profile]
 

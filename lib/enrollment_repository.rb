@@ -53,12 +53,6 @@ class EnrollmentRepository
     end
   end
 
-  # def load_csv(file)
-  #   CSV.open "#{file}",
-  #       headers:true,
-  #       header_converters: :symbol
-  # end
-
   def save_contents(contents)
     data = {}
     contents.each do |row|

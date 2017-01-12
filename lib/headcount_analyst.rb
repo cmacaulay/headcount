@@ -10,15 +10,15 @@ class HeadcountAnalyst
     @district_repository = district_repository.districts
   end
 
-  def kindergarten_participation_rate_variation(first_district, against_district)
+  def kindergarten_participation_rate_variation(first_dist, against_dist)
 
-    first_district = district_repository.fetch(first_district)
-    against_district =
-    district_repository.fetch(against_district.fetch(:against))
+    first_dist = district_repository.fetch(first_dist)
+    against_dist =
+    district_repository.fetch(against_dist.fetch(:against))
 
     rate =
-    calculate_enrollment_average(first_district) /
-    calculate_enrollment_average(against_district)
+    calculate_enrollment_average(first_dist) /
+    calculate_enrollment_average(against_dist)
     format_number(rate)
   end
 
@@ -32,13 +32,13 @@ class HeadcountAnalyst
     format_number(average)
   end
 
-  def kindergarten_participation_rate_variation_trend(first_district, state_data)
-    first_district = access_kindergarten_data( district_repository.fetch( first_district ) )
+  def kindergarten_participation_rate_variation_trend(first_dist, state_data)
+    first_dist = access_kindergarten_data(district_repository.fetch(first_dist))
     state_data =
       access_kindergarten_data(
       district_repository.fetch(state_data.fetch( :against ) ) )
 
-    first_district.merge(state_data) do |year, district_rate, state_rate|
+    first_dist.merge(state_data) do |year, district_rate, state_rate|
       district_rate = district_rate.to_f
       state_rate    = state_rate.to_f
       comparison = district_rate / state_rate
@@ -83,18 +83,18 @@ class HeadcountAnalyst
     format_number(average)
   end
 
-  def kindergarten_participation_correlates_with_high_school_graduation(for_district)
-    if for_district.has_key?(:for)
-      for_district[:for] ==
-      "STATEWIDE" ? statewide_correlation : district_correlation(for_district)
+  def kindergarten_participation_correlates_with_high_school_graduation(for_dis)
+    if for_dis.has_key?(:for)
+      for_dis[:for] ==
+      "STATEWIDE" ? statewide_correlation : district_correlation(for_dis)
     else
-      multi_district_correlation(for_district)
+      multi_district_correlation(for_dis)
     end
   end
 
-  def district_correlation(for_district)
+  def district_correlation(for_dis)
     correlation =
-    kindergarten_participation_against_high_school_graduation(for_district[:for])
+    kindergarten_participation_against_high_school_graduation(for_dis[:for])
     1.5 > correlation && correlation > 0.6 ? true : false
   end
 
