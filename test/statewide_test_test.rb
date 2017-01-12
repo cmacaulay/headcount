@@ -1,29 +1,8 @@
 require_relative 'test_helper'
 require './lib/statewide_test'
 require './lib/statewide_test_repository'
-require "csv"
 
 class StatewideTestTest < Minitest::Test
-  # attr_reader   :str
-  #
-  #   def setup
-  #     @str = StatewideTestRepository.new
-  #   end
-  #
-  #   def load_data
-  #     str.load_data(
-  #                   {
-  #                     :statewide_testing => {
-  #                       :third_grade => "./data/3rd grade students scoring proficient or above on the CSAP_TCAP.csv",
-  #                       :eighth_grade => "./data/8th grade students scoring proficient or above on the CSAP_TCAP.csv",
-  #                       :math => "./data/Average proficiency on the CSAP_TCAP by race_ethnicity_ Math.csv",
-  #                       :reading => "./data/Average proficiency on the CSAP_TCAP by race_ethnicity_ Reading.csv",
-  #                       :writing => "./data/Average proficiency on the CSAP_TCAP by race_ethnicity_ Writing.csv"
-  #                                              }
-  #                     }
-  #                    )
-  #   end
-  #
 
   def test_it_stores_name
     row_1 = { :name => "ACADEMY 20", :third_grade => {2008 => {:math => 0.64}}}
@@ -122,7 +101,6 @@ class StatewideTestTest < Minitest::Test
     eighth_grade = {2008=>{:math=>0.88, :reading=>0.53}, 2009=>{:math=>0.76}}
     assert_equal third_grade, st.proficient_by_grade(3)
     assert_equal eighth_grade, st.proficient_by_grade(8)
-    # assert_raises(UnknownDataError), st.proficient_by_grade(99)
   end
 
   def test_it_extracts_proficiency_by_race_or_ethnicity_data1
@@ -167,8 +145,6 @@ class StatewideTestTest < Minitest::Test
 
       assert_equal 0.09, st.proficient_for_subject_by_grade_in_year(:math, 3, 2009)
       assert_equal 0.53, st.proficient_for_subject_by_grade_in_year(:reading, 8, 2008)
-      # assert_equal UnknownDataError, st.proficient_for_subject_by_grade_in_year(:science, 3, 2009)
-
   end
 
   def test_it_extracts_proficiency_by_race_or_ethnicity_data
@@ -184,42 +160,80 @@ class StatewideTestTest < Minitest::Test
       })
       statewide_test = str.find_by_name("ACADEMY 20")
 
-    #   expected =  { 2011 => {math: 0.816, reading: 0.897, writing: 0.826},
-    #   2012 => {math: 0.818, reading: 0.893, writing: 0.808},
-    #   2013 => {math: 0.805, reading: 0.901, writing: 0.810},
-    #   2014 => {math: 0.800, reading: 0.855, writing: 0.789},
-    # }
-
     assert_equal 0.818, statewide_test.proficient_for_subject_by_race_in_year(:math, :asian, 2012)
     assert_equal 0.851, statewide_test.proficient_for_subject_by_race_in_year(:reading, :white, 2011)
-    # assert_equal UnknownRaceError, statewide_test.proficient_for_subject_by_race_in_year(:writing, :filipino, 2011)
 
   end
+
+  def test_proficient_by_grade_raises_error_if_grade_not_3_or_8
+    str = StatewideTestRepository.new
+    str.load_data({
+     :statewide_testing => {
+       :third_grade => "./test/fixtures/3rd grade students scoring proficient or above on the CSAP_TCAP.csv",
+       :eighth_grade => "./test/fixtures/8th grade students scoring proficient or above on the CSAP_TCAP.csv",
+       :math => "./test/fixtures/Average proficiency on the CSAP_TCAP by race_ethnicity_ Math.csv",
+       :reading => "./test/fixtures/Average proficiency on the CSAP_TCAP by race_ethnicity_ Reading.csv",
+       :writing => "./test/fixtures/Average proficiency on the CSAP_TCAP by race_ethnicity_ Writing.csv"
+     }
+   })
+
+   st = str.find_by_name("ACADEMY 20")
+  assert_raises(UnknownDataError) {st.proficient_by_grade(4)}
+  assert_raises(UnknownDataError) {st.proficient_by_grade(123)}
+  assert_raises(UnknownDataError) {st.proficient_by_grade('a')}
 end
-#
-#
-#
-#
-#
-# Location,Score,TimeFrame,DataFormat,Data
-# Colorado,Writing,2014,Percent,0.56183
-# ACADEMY 20,Math,2008,Percent,0.64
-# ACADEMY 20,Math,2010,Percent,0.672
-# ACADEMY 20,Reading,2008,Percent,0.843
-# ACADEMY 20,Writing,2008,Percent,0.734
-# ACADEMY 20,Writing,2009,Percent,0.701
-# ADAMS COUNTY 14,Math,2008,Percent,0.22
-# ADAMS COUNTY 14,Math,2009,Percent,0.3
-#
-#
-# district => grade => year => subject => score
-#
-# statewide_test.proficient_by_grade(3)
-# => { 2008 => {:math => 0.857, :reading => 0.866, :writing => 0.671},
-#      2009 => {:math => 0.824, :reading => 0.862, :writing => 0.706},
-#      2010 => {:math => 0.849, :reading => 0.864, :writing => 0.662},
-#      2011 => {:math => 0.819, :reading => 0.867, :writing => 0.678},
-#      2012 => {:math => 0.830, :reading => 0.870, :writing => 0.655},
-#      2013 => {:math => 0.855, :reading => 0.859, :writing => 0.668},
-#      2014 => {:math => 0.834, :reading => 0.831, :writing => 0.639}
-#    }
+
+def test_proficient_by_grade_raises_error_if_invalid_race
+  str = StatewideTestRepository.new
+  str.load_data({
+   :statewide_testing => {
+     :third_grade => "./test/fixtures/3rd grade students scoring proficient or above on the CSAP_TCAP.csv",
+     :eighth_grade => "./test/fixtures/8th grade students scoring proficient or above on the CSAP_TCAP.csv",
+     :math => "./test/fixtures/Average proficiency on the CSAP_TCAP by race_ethnicity_ Math.csv",
+     :reading => "./test/fixtures/Average proficiency on the CSAP_TCAP by race_ethnicity_ Reading.csv",
+     :writing => "./test/fixtures/Average proficiency on the CSAP_TCAP by race_ethnicity_ Writing.csv"
+   }
+ })
+
+  st = str.find_by_name("ACADEMY 20")
+  assert_raises(UnknownRaceError) {st.proficient_by_race_or_ethnicity(:chicken)}
+  assert_raises(UnknownRaceError) {st.proficient_by_race_or_ethnicity(:caucasian)}
+  assert_raises(UnknownRaceError) {st.proficient_by_race_or_ethnicity(:spanish)}
+end
+
+def test_proficient_for_subject_grade_year_raises_error_if_wrong_parameter
+  str = StatewideTestRepository.new
+  str.load_data({
+   :statewide_testing => {
+     :third_grade => "./test/fixtures/3rd grade students scoring proficient or above on the CSAP_TCAP.csv",
+     :eighth_grade => "./test/fixtures/8th grade students scoring proficient or above on the CSAP_TCAP.csv",
+     :math => "./test/fixtures/Average proficiency on the CSAP_TCAP by race_ethnicity_ Math.csv",
+     :reading => "./test/fixtures/Average proficiency on the CSAP_TCAP by race_ethnicity_ Reading.csv",
+     :writing => "./test/fixtures/Average proficiency on the CSAP_TCAP by race_ethnicity_ Writing.csv"
+   }
+  })
+
+  st = str.find_by_name("ACADEMY 20")
+  assert_raises(UnknownDataError) {st.proficient_for_subject_by_grade_in_year(:science, 3, 2012)}
+  assert_raises(UnknownDataError) {st.proficient_for_subject_by_grade_in_year(:geometry, 8, 2941)}
+  assert_raises(UnknownDataError) {st.proficient_for_subject_by_grade_in_year(:spanish, 12, 2012)}
+end
+
+def test_proficient_for_subject_race_year_raises_error_if_wrong_parameter
+  str = StatewideTestRepository.new
+  str.load_data({
+   :statewide_testing => {
+     :third_grade => "./test/fixtures/3rd grade students scoring proficient or above on the CSAP_TCAP.csv",
+     :eighth_grade => "./test/fixtures/8th grade students scoring proficient or above on the CSAP_TCAP.csv",
+     :math => "./test/fixtures/Average proficiency on the CSAP_TCAP by race_ethnicity_ Math.csv",
+     :reading => "./test/fixtures/Average proficiency on the CSAP_TCAP by race_ethnicity_ Reading.csv",
+     :writing => "./test/fixtures/Average proficiency on the CSAP_TCAP by race_ethnicity_ Writing.csv"
+   }
+   })
+
+  st = str.find_by_name("ACADEMY 20")
+  assert_raises(UnknownDataError) {st.proficient_for_subject_by_race_in_year(:math, :yellow, 2012)}
+  assert_raises(UnknownDataError) {st.proficient_for_subject_by_race_in_year(:geometry, :spanish, 2941)}
+  assert_raises(UnknownDataError) {st.proficient_for_subject_by_race_in_year(:spanish, :white, 2012)}
+end
+end
